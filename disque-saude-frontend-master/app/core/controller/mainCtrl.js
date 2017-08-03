@@ -1,3 +1,5 @@
+
+
 app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $location) {
 
     $scope.registerComplaint = function (complaint) {
@@ -17,7 +19,7 @@ app.controller("searchAverangeCtrl", function ($scope, $http) {
     $scope.average = null;
 
     $scope.searchAveragePerPatient = function (id) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/geral/medicos/" + id).then(function successCallback(response) {
+        $http.get("http://localhost:5000/SpringBootRestApi/unidade/geral/medicos/" + id).then(function successCallback(response) {
             $scope.average = response.data.obj;
         }, function errorCallback(error) {
             console.log("Unidade Não Encontrada");
@@ -43,7 +45,7 @@ app.controller("searchHealthUnitCtrl", function ($scope, $http) {
     $scope.units = [];
 
     $scope.searchHU = function (neighborhood) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/busca?bairro=" + neighborhood)
+        $http.get("http://localhost:5000/SpringBootRestApi/us/unidade/busca?bairro=" + neighborhood)
             .then(function success(response) {
                 $scope.units = [];
                 $scope.units.push(response.data);
@@ -61,7 +63,7 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
     $scope.situation = "";
 
     var getGeneralSituationComplaints = function (neighborhood) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/geral/situacao")
+        $http.get("http://localhost:5000/SpringBootRestApi/us/geral/situacao")
             .then(function success(response) {
                 console.log(response.data.obj);
 
