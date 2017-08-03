@@ -1,6 +1,8 @@
 package com.ufcg.si1.controller;
 
 import br.edu.ufcg.Hospital;
+
+import com.ufcg.si1.enuns.Situacao;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.CustomErrorType;
@@ -31,7 +33,7 @@ public class RestApiController {
     /* situação normal =0
        situação extra =1
      */
-    private int situacaoAtualPrefeitura = 0;
+    private SituacaoPrefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
 
 
     // -------------------Retrieve All Complaints---------------------------------------------
@@ -116,7 +118,7 @@ public class RestApiController {
 
     @RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
     public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
-        queixaAFechar.situacao = Queixa.FECHADA;
+        queixaAFechar.situacao = Situacao.FECHADA;
         queixaService.updateQueixa(queixaAFechar);
         return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
     }
@@ -241,30 +243,15 @@ public class RestApiController {
         // dependendo da situacao da prefeitura, o criterio de avaliacao muda
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        if (situacaoAtualPrefeitura == 0) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.2) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
-        if (this.situacaoAtualPrefeitura == 1) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.05) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
+
+        // (LUAN) Fiz STRATEGY aqui
+        ObjWrapper<Integer> obj = this.situacaoAtualPrefeitura.getSituacaoGeral((double) numeroQueixasAbertas(), queixaService.size());
 
         //situacao retornada
         //0: RUIM
         //1: REGULAR
         //2: BOM
-        return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(2), HttpStatus.OK);
+        return new ResponseEntity<ObjWrapper<Integer>>(obj, HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidade/busca", method= RequestMethod.GET)
@@ -283,7 +270,7 @@ public class RestApiController {
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getSituacao() == Queixa.ABERTA)
+            if (q.getSituacao() == Situacao.ABERTA)
                 contador++;
         }
 
