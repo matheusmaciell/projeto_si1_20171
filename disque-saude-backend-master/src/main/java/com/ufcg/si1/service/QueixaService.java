@@ -9,15 +9,12 @@ import com.ufcg.si1.model.Queixa;
 public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
-
-
+	
     void saveQueixa(Queixa queixa);
-
 
 	Queixa findById(long id);
 
 	void updateQueixa(Queixa user);
-
 
 	void deleteQueixaById(long id);
 

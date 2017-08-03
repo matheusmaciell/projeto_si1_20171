@@ -1,5 +1,6 @@
 package com.ufcg.si1.service;
 
+import com.ufcg.si1.enuns.Situacao;
 import com.ufcg.si1.model.Queixa;
 import org.springframework.stereotype.Service;
 
@@ -24,20 +25,20 @@ public class QueixaServiceImpl implements QueixaService {
         List<Queixa> queixas = new ArrayList<Queixa>();
 
         queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
-                Queixa.FECHADA, "", "Jose Silva",
+        		Situacao.FECHADA, "", "Jose Silva",
                 "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
         queixas.add(new Queixa(counter.incrementAndGet(),
-                "Bacalhau estragado, passamos mal!", Queixa.FECHADA, "",
+                "Bacalhau estragado, passamos mal!", Situacao.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", Queixa.FECHADA, "",
+        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", Situacao.FECHADA, "",
                 "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", Queixa.FECHADA, "",
+        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", Situacao.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
