@@ -59,7 +59,7 @@ public class RestUnidadeController {
     }
 
 
-    @RequestMapping(value = "/mediaPacienteMedicoPorDia/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/calculaMediaMedicoID/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
 
         Object unidade = unidadeSaudeService.findById(id);
@@ -104,14 +104,14 @@ public class RestUnidadeController {
             }
         }
 
-        //situacao retornada
+        //situacao retornada        -  Fazer Enum(?)
         //0: RUIM
         //1: REGULAR
         //2: BOM
         return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(2), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/unidadesSaudeBairro/", method= RequestMethod.GET)
+    @RequestMapping(value="/unidade/busca", method= RequestMethod.GET)
     public ResponseEntity<?> consultarUnidadeSaudePorBairro(@RequestParam(value = "bairro", required = true) String bairro){
         Object us = unidadeSaudeService.findByBairro(bairro);
         if (us == null && !(us instanceof UnidadeSaude)) {

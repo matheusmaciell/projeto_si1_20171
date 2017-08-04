@@ -29,7 +29,7 @@ public class RestEspecialidadeController {
 	 EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 
-	@RequestMapping(value = "/porUnidadeSaude/", method = RequestMethod.GET)
+	@RequestMapping(value = "/especialidadePorUnidades", method = RequestMethod.GET)
     public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
 
         Object us = null;
@@ -48,7 +48,7 @@ public class RestEspecialidadeController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/getUnidades/", method = RequestMethod.GET)
+    @RequestMapping(value = "/unidade/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
         List<Object> unidades = unidadeSaudeService.getAll();
         if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,7 +63,7 @@ public class RestEspecialidadeController {
         }
     }
 
-    @RequestMapping(value = "/incluirEspecialidade/", method = RequestMethod.POST)
+    @RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
     public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp, UriComponentsBuilder ucBuilder) {
         try {
             especialidadeService.insere(esp);
@@ -78,7 +78,7 @@ public class RestEspecialidadeController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(value = "/consultaEspecialidadeID/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/especialidade/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) {
 
         Especialidade q = especialidadeService.findById(id);

@@ -59,7 +59,7 @@ public class RestUnidadeController {
     }
 
 
-    @RequestMapping(value = "/mediaPacienteMedicoPorDia/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/calculaMediaMedicoID/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
 
         Object unidade = unidadeSaudeService.findById(id);
