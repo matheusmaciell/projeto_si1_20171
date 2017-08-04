@@ -3,7 +3,7 @@
 app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $location) {
 
     $scope.registerComplaint = function (complaint) {
-        $http.post("http://localhost:5000/SpringBootRestApi/queixa/abrirQueixa", JSON.stringify(complaint))
+        $http.post("http://localhost:5000/SpringBootRestApi/queixa/abrirQueixa/", JSON.stringify(complaint))
             .then(function success(response) {
                 toastr.success("Queixa adicionada com sucesso!");
                 $location.path('/createdcomplaint/' + response.data.id);
@@ -31,7 +31,7 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
     $scope.complaint;
 
     $scope.searchComplaint = function (id) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/queixa/" + id).then(function successCallback(response) {
+        $http.get("http://localhost:5000/SpringBootRestApi/queixa/consultarQueixaID/" + id).then(function successCallback(response) {
             $scope.complaint = response.data;
         }, function errorCallback(error) {
             $scope.complaint = null;

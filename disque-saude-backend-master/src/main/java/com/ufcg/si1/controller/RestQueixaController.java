@@ -24,7 +24,7 @@ public class RestQueixaController {
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
 
-	@RequestMapping(value = "/queixa/", method = RequestMethod.GET)
+	@RequestMapping(value = "/listarQueixa/", method = RequestMethod.GET)
 	public ResponseEntity<List<Queixa>> listAllUsers() {
 		List<Queixa> queixas = queixaService.findAllQueixas();
 
@@ -38,7 +38,7 @@ public class RestQueixaController {
 	// -------------------Abrir uma
 	// Queixa-------------------------------------------
 
-	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
+	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
 
 		// este codigo estava aqui, mas nao precisa mais
@@ -61,7 +61,7 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/consultarQueixaID/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixa(@PathVariable("id") long id) {
 
 		Queixa q = queixaService.findById(id);
@@ -71,7 +71,7 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updateQueixaID/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateQueixa(@PathVariable("id") long id, @RequestBody Queixa queixa) {
 
 		Queixa currentQueixa = queixaService.findById(id);
@@ -88,7 +88,7 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(currentQueixa, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deletarQueixaID/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
 
 		Queixa user = queixaService.findById(id);
@@ -100,7 +100,7 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
+	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
 		queixaAFechar.situacao = Situacao.FECHADA;
 		queixaService.updateQueixa(queixaAFechar);
