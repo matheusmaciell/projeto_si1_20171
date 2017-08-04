@@ -13,12 +13,8 @@ public class Queixa {
 
 	private Pessoa solicitante;
 
-	public Situacao situacao; // usa variaveis estaticas abaixo
-	/* situacoes da queixa 
-	public static final int ABERTA = 1;
-	public static final int EM_ANDAMENTO = 2;
-	public static final int FECHADA = 3;
-*/
+	public Situacao situacao;
+	
 	private String comentario = ""; // usado na atualizacao da queixa
 
 	public Queixa(){

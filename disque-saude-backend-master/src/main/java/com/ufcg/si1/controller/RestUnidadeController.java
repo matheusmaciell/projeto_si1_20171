@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.ufcg.si1.enuns.Situacao;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.*;
@@ -51,7 +52,7 @@ public class RestUnidadeController {
 
         Object us = unidadeSaudeService.findById(id);
         if (us == null) {
-            return new ResponseEntity(new CustomErrorType("Unidade with id " + id
+            return new ResponseEntity<>(new CustomErrorType("Unidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(us, HttpStatus.OK);
@@ -114,7 +115,7 @@ public class RestUnidadeController {
     public ResponseEntity<?> consultarUnidadeSaudePorBairro(@RequestParam(value = "bairro", required = true) String bairro){
         Object us = unidadeSaudeService.findByBairro(bairro);
         if (us == null && !(us instanceof UnidadeSaude)) {
-            return new ResponseEntity(new CustomErrorType("Unidade with bairro " + bairro
+            return new ResponseEntity<>(new CustomErrorType("Unidade with bairro " + bairro
                     + " not found"), HttpStatus.NOT_FOUND);
         }
 
@@ -126,7 +127,7 @@ public class RestUnidadeController {
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getSituacao() == Queixa.ABERTA)
+            if (q.getSituacao() == Situacao.ABERTA)
                 contador++;
         }
 

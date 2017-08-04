@@ -2,6 +2,11 @@ package com.ufcg.si1.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.ufcg.si1.service.UnidadeSaudeService;
+
+import exceptions.ObjetoInexistenteException;
+import exceptions.ObjetoJaExistenteException;
+import exceptions.Rep;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +61,4 @@ public class UnidadeSaude {
     public void mudaCodigo(int cod) {
         this.codigo = cod;
     }
-
 }

@@ -43,7 +43,7 @@ public class RestApiController {
         List<Queixa> queixas = queixaService.findAllQueixas();
 
         if (queixas.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<Queixa>>(queixas, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class RestApiController {
     // -------------------Abrir uma Queixa-------------------------------------------
 
     @RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-    public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Queixa> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
 
         //este codigo estava aqui, mas nao precisa mais
         /*if (queixaService.doesQueixaExist(queixa)) {
@@ -63,7 +63,7 @@ public class RestApiController {
         try {
             queixa.abrir();
         } catch (ObjetoInvalidoException e) {
-            return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         queixaService.saveQueixa(queixa);
 
@@ -79,7 +79,7 @@ public class RestApiController {
 
         Queixa q = queixaService.findById(id);
         if (q == null) {
-            return new ResponseEntity(new CustomErrorType("Queixa with id " + id
+            return new ResponseEntity<>(new CustomErrorType("Queixa with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Queixa>(q, HttpStatus.OK);
@@ -92,7 +92,7 @@ public class RestApiController {
         Queixa currentQueixa = queixaService.findById(id);
 
         if (currentQueixa == null) {
-            return new ResponseEntity(new CustomErrorType("Unable to upate. Queixa with id " + id + " not found."),
+            return new ResponseEntity<>(new CustomErrorType("Unable to upate. Queixa with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
         }
 
@@ -108,7 +108,7 @@ public class RestApiController {
 
         Queixa user = queixaService.findById(id);
         if (user == null) {
-            return new ResponseEntity(new CustomErrorType("Unable to delete. Queixa with id " + id + " not found."),
+            return new ResponseEntity<>(new CustomErrorType("Unable to delete. Queixa with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
         }
         queixaService.deleteQueixaById(id);
@@ -117,7 +117,7 @@ public class RestApiController {
 
 
     @RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
-    public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
+    public ResponseEntity<Queixa> fecharQueixa(@RequestBody Queixa queixaAFechar) {
         queixaAFechar.situacao = Situacao.FECHADA;
         queixaService.updateQueixa(queixaAFechar);
         return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
@@ -133,22 +133,22 @@ public class RestApiController {
         try {
             us = unidadeSaudeService.procura(codigoUnidadeSaude);
         } catch (Rep e) {
-            return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (ObjetoInexistenteException e) {
-            return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         if (us instanceof UnidadeSaude){
             UnidadeSaude us1 = (UnidadeSaude) us;
             return new ResponseEntity<>(us1.getEspecialidades(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/unidade/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
         List<Object> unidades = unidadeSaudeService.getAll();
-        if (unidades.isEmpty()) return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+        if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else{
             List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
             for (Object  saude: unidades) {
@@ -199,7 +199,7 @@ public class RestApiController {
 
         Especialidade q = especialidadeService.findById(id);
         if (q == null) {
-            return new ResponseEntity(new CustomErrorType("Especialidade with id " + id
+            return new ResponseEntity<>(new CustomErrorType("Especialidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Especialidade>(q, HttpStatus.OK);
@@ -210,7 +210,7 @@ public class RestApiController {
 
         Object us = unidadeSaudeService.findById(id);
         if (us == null) {
-            return new ResponseEntity(new CustomErrorType("Unidade with id " + id
+            return new ResponseEntity<>(new CustomErrorType("Unidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(us, HttpStatus.OK);
@@ -258,7 +258,7 @@ public class RestApiController {
     public ResponseEntity<?> consultarUnidadeSaudePorBairro(@RequestParam(value = "bairro", required = true) String bairro){
         Object us = unidadeSaudeService.findByBairro(bairro);
         if (us == null && !(us instanceof UnidadeSaude)) {
-            return new ResponseEntity(new CustomErrorType("Unidade with bairro " + bairro
+            return new ResponseEntity<>(new CustomErrorType("Unidade with bairro " + bairro
                     + " not found"), HttpStatus.NOT_FOUND);
         }
 

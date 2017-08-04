@@ -36,22 +36,22 @@ public class RestEspecialidadeController {
         try {
             us = unidadeSaudeService.procura(codigoUnidadeSaude);
         } catch (Rep e) {
-            return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (ObjetoInexistenteException e) {
-            return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         if (us instanceof UnidadeSaude){
             UnidadeSaude us1 = (UnidadeSaude) us;
             return new ResponseEntity<>(us1.getEspecialidades(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/unidade/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
         List<Object> unidades = unidadeSaudeService.getAll();
-        if (unidades.isEmpty()) return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+        if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else{
             List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
             for (Object  saude: unidades) {
@@ -83,7 +83,7 @@ public class RestEspecialidadeController {
 
         Especialidade q = especialidadeService.findById(id);
         if (q == null) {
-            return new ResponseEntity(new CustomErrorType("Especialidade with id " + id
+            return new ResponseEntity<>(new CustomErrorType("Especialidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Especialidade>(q, HttpStatus.OK);

@@ -57,25 +57,25 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         if (us == null) {throw new Rep("Erro!");
         } else{
         if (us instanceof UnidadeSaude){
-        ((UnidadeSaude) us).mudaCodigo(++geraCodigo);
+        	((UnidadeSaude) us).mudaCodigo(++geraCodigo);
         }else {
-        ((Hospital) us).setCodigo(++geraCodigo);
+        	((Hospital) us).setCodigo(++geraCodigo);
         }}
 
         if (indice == this.vetor.length) {
-        throw new Rep("Erro ao incluir no array");
+        	throw new Rep("Erro ao incluir no array");
         }
 
         if (us instanceof UnidadeSaude){
-        UnidadeSaude unidadeSaude = (UnidadeSaude) us;
-        if (this.existe(unidadeSaude.pegaCodigo())){
-        throw new ObjetoJaExistenteException("Objeto jah existe no array");
-        }
+        	UnidadeSaude unidadeSaude = (UnidadeSaude) us;
+        	if (this.existe(unidadeSaude.pegaCodigo())){
+        		throw new ObjetoJaExistenteException("Objeto jah existe no array");
+        	}
         } else if (us instanceof Hospital){
-        Hospital hospital = (Hospital) us;
-        if (this.existe(hospital.getCodigo())){
-        throw new ObjetoJaExistenteException("Objeto jah existe no array");
-        }
+        	Hospital hospital = (Hospital) us;
+        	if (this.existe(hospital.getCodigo())){
+        		throw new ObjetoJaExistenteException("Objeto jah existe no array");
+        	}
         }
 
 
