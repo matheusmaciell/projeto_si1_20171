@@ -1,6 +1,6 @@
 package com.ufcg.si1.controller;
 
-import com.ufcg.si1.enuns.Situacao;
+import com.ufcg.si1.enuns.SituacaoQueixa;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.CustomErrorType;
@@ -102,7 +102,7 @@ public class RestQueixaController {
 
 	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
-		queixaAFechar.situacao = Situacao.FECHADA;
+		queixaAFechar.situacao = SituacaoQueixa.FECHADA;
 		queixaService.updateQueixa(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}

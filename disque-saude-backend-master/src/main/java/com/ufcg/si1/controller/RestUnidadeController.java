@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ufcg.si1.enuns.Situacao;
+import com.ufcg.si1.enuns.SituacaoQueixa;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.*;
@@ -25,7 +25,7 @@ public class RestUnidadeController {
 	
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-	 private int situacaoAtualPrefeitura = 0;
+	 private SituacaoPrefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
@@ -85,30 +85,13 @@ public class RestUnidadeController {
         // dependendo da situacao da prefeitura, o criterio de avaliacao muda
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        if (situacaoAtualPrefeitura == 0) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.2) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
-        if (this.situacaoAtualPrefeitura == 1) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.05) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
+        ObjWrapper<Integer> obj = this.situacaoAtualPrefeitura.getSituacaoGeral((double)numeroQueixasAbertas(), queixaService.size());
 
         //situacao retornada
         //0: RUIM
         //1: REGULAR
         //2: BOM
-        return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(2), HttpStatus.OK);
+        return new ResponseEntity<ObjWrapper<Integer>>(obj, HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidadesSaudeBairro/", method= RequestMethod.GET)
@@ -127,7 +110,7 @@ public class RestUnidadeController {
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getSituacao() == Situacao.ABERTA)
+            if (q.getSituacao() == SituacaoQueixa.ABERTA)
                 contador++;
         }
 
