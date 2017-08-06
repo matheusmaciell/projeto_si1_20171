@@ -9,6 +9,7 @@ import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -61,4 +62,44 @@ public class UnidadeSaude {
     public void mudaCodigo(int cod) {
         this.codigo = cod;
     }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codigo;
+		result = prime * result + contador;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
+		result = prime * result + Arrays.hashCode(numeroQueixas);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadeSaude other = (UnidadeSaude) obj;
+		if (codigo != other.codigo)
+			return false;
+		if (contador != other.contador)
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (especialidades == null) {
+			if (other.especialidades != null)
+				return false;
+		} else if (!especialidades.equals(other.especialidades))
+			return false;
+		if (!Arrays.equals(numeroQueixas, other.numeroQueixas))
+			return false;
+		return true;
+	}
+    
+    
 }
