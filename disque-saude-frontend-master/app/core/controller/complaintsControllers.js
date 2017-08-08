@@ -34,12 +34,12 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
                         color: "label-primary"
                     };
                 } else {
-                    $scope.situation = "";
+                    $scope.situation = ""; // nao entendi esta declaracao aqui
                     $scope.situation = {
                         status: "BOM",
                         color: "label-success"
                     };
-                    
+
                 }
             }, function failed(error) {
                 console.log("Erro na busca de unidades");
@@ -71,4 +71,3 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
         });
     }
 });
-
