@@ -25,7 +25,7 @@ public class RestUnidadeController {
 	
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-	 private SituacaoPrefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
+	 private PrefeituraNormal situacaoAtualPrefeitura = new PrefeituraNormal();
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
@@ -85,13 +85,13 @@ public class RestUnidadeController {
         // dependendo da situacao da prefeitura, o criterio de avaliacao muda
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        ObjWrapper<Integer> obj = this.situacaoAtualPrefeitura.getSituacaoGeral((double)numeroQueixasAbertas(), queixaService.size());
+        Object obj = this.situacaoAtualPrefeitura.getSituacaoGeral((double)numeroQueixasAbertas(), queixaService.size());
 
         //situacao retornada
         //0: RUIM
         //1: REGULAR
         //2: BOM
-        return new ResponseEntity<ObjWrapper<Integer>>(obj, HttpStatus.OK);
+        return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidadesSaudeBairro/", method= RequestMethod.GET)

@@ -1,23 +1,21 @@
 package com.ufcg.si1.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.ufcg.si1.util.ObjWrapper;
 
-public class PrefeituraNormal implements SituacaoPrefeitura {
+public class PrefeituraNormal{
 	
-	 public ObjWrapper<Integer> getSituacaoGeral(double numQueixasAbertas, int queixaService) {	 
-         if (numQueixasAbertas / queixaService > 0.2) {
-             return new ObjWrapper<Integer>(0);
-         } else {
-             if (numQueixasAbertas/ queixaService > 0.1) {
-                 return new ObjWrapper<Integer>(1);
-             }
-             
-             return new ObjWrapper<Integer>(2);
-         }
-		 
-	 }
+	private static final double quoeficienteRegular = 0.1;
+	private static final double quoeficienteRuim = 0.2;
+	private SituacaoPrefeitura situacao;	
 
+	public PrefeituraNormal(){
+		this.situacao = new SituacaoPrefeitura(quoeficienteRuim,quoeficienteRegular);
+	}
+	
+	
+	public Object getSituacaoGeral(double numQueixasAbertas, int queixaService) {
+		 return this.situacao.getSituacaoGeral(numQueixasAbertas, queixaService);
+	
+	}
+	
 }
