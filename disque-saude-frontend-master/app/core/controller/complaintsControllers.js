@@ -17,37 +17,14 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
     $scope.situation = "";
 
     var getGeneralSituationComplaints = function (neighborhood) {
-        $http.get("http://localhost:5000/SpringBootRestApi/unidadeSaude/situacaoGeralQueixas/")
+         $http.get("http://localhost:5000/SpringBootRestApi/unidadeSaude/situacaoGeralQueixas/")
             .then(function success(response) {
-<<<<<<< HEAD
-                 $scope.situation = "";
-                    $scope.situation = {
-                        status: response.data.situacao,
-                        color: response.data.cor}
-=======
-                console.log(response.data.obj);
+                console.log(response.data);
 
-                if(response.data.obj == 0){
+               $scope.situation = "";
                     $scope.situation = {
-                        status: "RUIM",
-                        color: "label-danger"
-                    };
-
-                } else if(response.data.obj == 1){
-
-                    $scope.situation = {
-                        status: "REGULAR",
-                        color: "label-primary"
-                    };
-                } else {
-                    $scope.situation = ""; // nao entendi esta declaracao aqui
-                    $scope.situation = {
-                        status: "BOM",
-                        color: "label-success"
-                    };
-
-                }
->>>>>>> 25aea35923261d1062d052e225db1a283f4f463f
+                        status: "response.data.situacao",
+                        color: "response.data.cor"}
             }, function failed(error) {
                 console.log("Erro na busca de unidades");
                 console.log(error.data.errorMessage);
