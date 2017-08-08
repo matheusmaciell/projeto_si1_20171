@@ -34,7 +34,7 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
                         color: "label-primary"
                     };
                 } else {
-                    $scope.situation = ""; // nao entendi esta declaracao aqui
+                    $scope.situation = "";
                     $scope.situation = {
                         status: "BOM",
                         color: "label-success"
