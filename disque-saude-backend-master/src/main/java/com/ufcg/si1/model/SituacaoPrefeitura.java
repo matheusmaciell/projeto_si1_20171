@@ -10,15 +10,13 @@ public class SituacaoPrefeitura {
 		this.quoeficienteRegular = quoeficienteRegular;
 	}
 	
-	public Object getSituacaoGeral(double numQueixasAbertas, int queixaService) {
-		if (numQueixasAbertas / queixaService > quoeficienteRuim) {
-            return new SituacaoRuim();
-        } else {
-            if (numQueixasAbertas / queixaService > quoeficienteRegular) {
-                return new SituacaoRegular();
-            }
+	public Situacao getSituacaoGeral(double numQueixasAbertas, int queixaService) {
+		if (numQueixasAbertas / queixaService > quoeficienteRuim) 
+            return new SituacaoRuim(); 
+        if (numQueixasAbertas / queixaService > quoeficienteRegular)
+             return new SituacaoRegular();
+        else 
             return new SituacaoBoa();
-        }
 	}
 	
 	
