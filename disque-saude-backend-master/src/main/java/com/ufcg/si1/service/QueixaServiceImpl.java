@@ -93,6 +93,13 @@ public class QueixaServiceImpl implements QueixaService {
         return null;
     }
 
-
+    public Queixa findByName(String name) {
+    	for(Queixa queixa : queixas) {
+    		if(queixa.getSolicitante().getNome().equals(name)) {
+    			return queixa;
+    		}
+    	}
+    	return null;
+    }
 
 }
