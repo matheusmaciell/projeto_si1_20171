@@ -11,7 +11,7 @@ public abstract class Prefeitura {
 	}
 	
 	public Situacao getSituacaoGeral(double numQueixasAbertas, int queixaService) {
-		 return this.situacao.getSituacaoGeral(numQueixasAbertas, queixaService);
+		 return this.getSituacao().getSituacaoGeral(numQueixasAbertas, queixaService);
 	}
 
 	public double getQuoeficienteRuim() {

@@ -9,10 +9,4 @@ public class PrefeituraExtra extends Prefeitura{
 		this.setQuoeficienteRegular(QUOEFICIENTEREGULAR);
 		this.setQuoeficienteRuim(QUOEFICIENTERUIM);
 	}
-	
-	public Situacao getSituacaoGeral(double numQueixasAbertas, int queixaService) {
-		 return this.getSituacao().getSituacaoGeral(numQueixasAbertas, queixaService);
-	
-	}
-
 }
