@@ -1,20 +1,17 @@
 package com.ufcg.si1.model;
 
-
-
-public class PrefeituraNormal{
+public class PrefeituraNormal extends Prefeitura{
 	
-	private static final double quoeficienteRegular = 0.1;
-	private static final double quoeficienteRuim = 0.2;
-	private SituacaoPrefeitura situacao;	
+	private static final double QUOEFICIENTEREGULAR = 0.1;
+	private static final double QUOEFICIENTERUIM = 0.2;
 
 	public PrefeituraNormal(){
-		this.situacao = new SituacaoPrefeitura(quoeficienteRuim,quoeficienteRegular);
+		this.setQuoeficienteRegular(QUOEFICIENTEREGULAR);
+		this.setQuoeficienteRuim(QUOEFICIENTERUIM);
 	}
 	
-	
-	public Object getSituacaoGeral(double numQueixasAbertas, int queixaService) {
-		 return this.situacao.getSituacaoGeral(numQueixasAbertas, queixaService);
+	public Situacao getSituacaoGeral(double numQueixasAbertas, int queixaService) {
+		 return this.getSituacao().getSituacaoGeral(numQueixasAbertas, queixaService);
 	
 	}
 	
