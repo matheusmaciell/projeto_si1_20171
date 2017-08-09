@@ -1,22 +1,10 @@
 package com.ufcg.si1.model;
 
-public class SituacaoBoa {
-	private String situacao = "BOA";
-	private String cor = "label-success";
+public class SituacaoBoa extends Situacao {
 	
-	
-	public String getSituacao() {
-		return situacao;
+	public SituacaoBoa() {
+		this.setSituacao("label-success");
+		this.setCor("BOA");	
 	}
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-	public String getCor() {
-		return cor;
-	}
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
-	
 	
 }
