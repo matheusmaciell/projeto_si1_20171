@@ -25,7 +25,7 @@ public class RestUnidadeController {
 	
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-	 private PrefeituraNormal situacaoAtualPrefeitura = new PrefeituraNormal();
+	 private Prefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)

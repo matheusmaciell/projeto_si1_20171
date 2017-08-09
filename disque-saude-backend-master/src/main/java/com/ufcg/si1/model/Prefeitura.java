@@ -71,8 +71,4 @@ public abstract class Prefeitura {
 			return false;
 		return true;
 	}
-	
-	public String toString(){
-		return "";
-	}
 }
