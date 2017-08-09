@@ -10,7 +10,7 @@ public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
 	
-    void saveQueixa(Queixa queixa);
+    void saveQueixa(Queixa queixa) throws QueixaVaziaException;
 
 	Queixa findById(long id);
 

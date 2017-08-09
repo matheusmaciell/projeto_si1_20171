@@ -53,7 +53,13 @@ public class RestQueixaController {
 		} catch (ObjetoInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		queixaService.saveQueixa(queixa);
+		
+		
+		try {
+			queixaService.saveQueixa(queixa);
+		} catch (QueixaVaziaException e) {    // ver se este try catch esta correto
+			e.printStackTrace();
+		}
 
 		// HttpHeaders headers = new HttpHeaders();
 		// headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());

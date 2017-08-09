@@ -49,9 +49,12 @@ public class QueixaServiceImpl implements QueixaService {
         return queixas;
     }
 
-    public void saveQueixa(Queixa queixa) {
-        queixa.setId(counter.incrementAndGet());
-        queixas.add(queixa);
+    public void saveQueixa(Queixa queixa) throws QueixaVaziaException {
+    	if(queixa != null){
+    		queixa.setId(counter.incrementAndGet());
+    		queixas.add(queixa);    		
+    	}                                                           // fazer try catch
+    	throw new QueixaVaziaException("Queixa Nula ou vazia!");
     }
 
     public void updateQueixa(Queixa queixa) {
