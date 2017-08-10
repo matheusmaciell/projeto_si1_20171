@@ -2,6 +2,7 @@ package com.ufcg.si1.state;
 
 public class QueixaAberta implements IQueixaState{
 
+	//Analisar a funcionalidade
 	@Override
 	public IQueixaState abrirQueixa() {
 		System.out.println("Queixa ja aberta!");
