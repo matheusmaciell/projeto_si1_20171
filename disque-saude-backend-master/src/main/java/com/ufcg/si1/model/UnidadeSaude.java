@@ -16,7 +16,7 @@ import java.util.List;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
 })
-public class UnidadeSaude {
+public abstract class UnidadeSaude {
     private int codigo;
 
     private String descricao;
@@ -62,6 +62,11 @@ public class UnidadeSaude {
     public void mudaCodigo(int cod) {
         this.codigo = cod;
     }
+    
+    public abstract int getNumeroFuncionarios();
+    
+    public abstract float atendimentosDiarios();
+    
 	@Override
 	public int hashCode() {
 		final int prime = 31;
