@@ -1,8 +1,8 @@
 package com.ufcg.si1.controller;
 
-import com.ufcg.si1.enuns.SituacaoQueixa;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;

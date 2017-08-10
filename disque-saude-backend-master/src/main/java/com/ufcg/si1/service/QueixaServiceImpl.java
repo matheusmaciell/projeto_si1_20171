@@ -1,7 +1,8 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.enuns.SituacaoQueixa;
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.state.SituacaoQueixa;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.ufcg.si1.enuns.SituacaoQueixa;
 import com.ufcg.si1.model.*;
+import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.ObjWrapper;
 import org.springframework.web.client.RestTemplate;
  
