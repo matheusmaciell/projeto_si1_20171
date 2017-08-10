@@ -68,11 +68,21 @@ public class RestQueixaController {
 	}
 
 	@RequestMapping(value = "/consultarQueixaID/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarQueixa(@PathVariable("id") long id) {
+	public ResponseEntity<?> consultarQueixaID(@PathVariable("id") long id) {
 
 		Queixa q = queixaService.findById(id);
 		if (q == null) {
 			return new ResponseEntity<>(new CustomErrorType("Queixa with id " + id + " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/consultarQueixaNome/{nome}", method = RequestMethod.GET)
+	public ResponseEntity<?> consultarQueixaNome(@PathVariable("nome") String nome) {
+
+		Queixa q = queixaService.findByName(nome);
+		if (q == null) {
+			return new ResponseEntity<>(new CustomErrorType("Queixa with nome " + nome + " not found"), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
 	}

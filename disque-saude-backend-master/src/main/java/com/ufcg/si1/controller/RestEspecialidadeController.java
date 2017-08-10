@@ -1,6 +1,5 @@
 package com.ufcg.si1.controller;
 
-import java.util.ArrayList;
 
 import java.util.List;
 
@@ -50,16 +49,11 @@ public class RestEspecialidadeController {
 
     @RequestMapping(value = "/getUnidades/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
-        List<Object> unidades = unidadeSaudeService.getAll();
+        List<UnidadeSaude> unidades = unidadeSaudeService.getAll();
         if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else{
-            List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
-            for (Object  saude: unidades) {
-                if(saude instanceof UnidadeSaude){
-                    unidadeSaudes.add((UnidadeSaude) saude);
-                }
-            }
-            return new ResponseEntity<>(unidadeSaudes, HttpStatus.OK);
+           
+            return new ResponseEntity<>(unidades, HttpStatus.OK);
         }
     }
 

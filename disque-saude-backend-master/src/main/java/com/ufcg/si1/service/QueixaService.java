@@ -13,6 +13,8 @@ public interface QueixaService {
     void saveQueixa(Queixa queixa) throws QueixaVaziaException;
 
 	Queixa findById(long id);
+	
+	Queixa findByName(String name);
 
 	void updateQueixa(Queixa user);
 

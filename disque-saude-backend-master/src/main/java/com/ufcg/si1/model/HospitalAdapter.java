@@ -1,0 +1,37 @@
+package com.ufcg.si1.model;
+
+
+import java.util.List;
+
+import br.edu.ufcg.Hospital;
+
+public class HospitalAdapter extends UnidadeSaude {
+	
+	private Hospital hospital;
+	
+	public HospitalAdapter(String descricao, int medicos, int num) {
+		this.hospital = new Hospital(descricao, medicos, num);
+	}
+	
+	@Override
+	public int pegaCodigo() {
+		return hospital.getCodigo();
+	}
+	
+	@Override
+	public void mudaCodigo(int codigo) {
+		hospital.setCodigo(codigo);
+	}
+	
+	@Override
+	public String pegaDescricao() {
+		return hospital.getDescricao();		
+	}
+	
+	public int pegaContador() {
+		return hospital.getContador();
+	}
+	
+	
+
+}

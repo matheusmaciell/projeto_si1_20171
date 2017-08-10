@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class SpringBootRestTestClient {
  
-    public static final String REST_SERVICE_URI = "http://localhost:5000/SpringBootRestApi/api";
+    public static final String REST_SERVICE_URI = "http://localhost:5000/SpringBootRestApi";
      
     /* GET */
     @SuppressWarnings("unchecked")
