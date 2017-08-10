@@ -36,4 +36,14 @@ public class PostoSaude extends UnidadeSaude{
     public void setTaxaDiariaAtendimentos(float taxaDiariaAtendimentos) {
         this.taxaDiariaAtendimentos = taxaDiariaAtendimentos;
     }
+
+	@Override
+	public int getNumeroFuncionarios() {
+		return this.getAtendentes();
+	}
+
+	@Override
+	public float atendimentosDiarios() {
+		return this.getTaxaDiariaAtendimentos();
+	}
 }

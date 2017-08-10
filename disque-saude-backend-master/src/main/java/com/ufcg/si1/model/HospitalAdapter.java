@@ -31,6 +31,18 @@ public class HospitalAdapter extends UnidadeSaude {
 	public int pegaContador() {
 		return hospital.getContador();
 	}
+
+	@Override
+	public int getNumeroFuncionarios() {
+		return hospital.getNumeroMedicos();
+	}
+
+	@Override
+	public float atendimentosDiarios() {
+		return hospital.getNumeroPacientesDia();
+	}
+	
+	
 	
 	
 
