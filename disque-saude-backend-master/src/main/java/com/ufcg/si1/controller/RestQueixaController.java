@@ -40,29 +40,11 @@ public class RestQueixaController {
 
 	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
-
-		// este codigo estava aqui, mas nao precisa mais
-		/*
-		 * if (queixaService.doesQueixaExist(queixa)) { return new
-		 * ResponseEntity(new CustomErrorType("Esta queixa já existe+
-		 * queixa.pegaDescricao()),HttpStatus.CONFLICT); }
-		 */
-
 		try {
 			queixa.abrir();
 		} catch (ObjetoInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		try {
-			queixaService.saveQueixa(queixa);
-		} catch (QueixaVaziaException e) {    // ver se este try catch esta correto
-			e.printStackTrace();
-		}
-
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());
 
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
