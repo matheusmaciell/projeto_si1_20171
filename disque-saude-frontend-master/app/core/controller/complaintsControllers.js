@@ -21,10 +21,9 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
             .then(function success(response) {
                 console.log(response.data);
 
-               $scope.situation = "";
-                    $scope.situation = {
-                        status: "response.data.situacao",
-                        color: "response.data.cor"}
+               $scope.situation = {
+                    status: response.data.situacao,
+                    color: response.data.cor}
             }, function failed(error) {
                 console.log("Erro na busca de unidades");
                 console.log(error.data.errorMessage);
