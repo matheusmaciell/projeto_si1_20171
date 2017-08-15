@@ -39,19 +39,18 @@ public class RestQueixaController {
 	// Queixa-------------------------------------------
 
 	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) throws QueixaVaziaException {
 		try {
 			queixa.abrir();
 		} catch (ObjetoInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
+		queixaService.saveQueixa(queixa);
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/consultarQueixaID/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixaID(@PathVariable("id") long id) {
-
 		Queixa q = queixaService.findById(id);
 		if (q == null) {
 			return new ResponseEntity<>(new CustomErrorType("Queixa with id " + id + " not found"), HttpStatus.NOT_FOUND);

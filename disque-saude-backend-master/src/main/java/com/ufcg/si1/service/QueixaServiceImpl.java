@@ -16,10 +16,11 @@ public class QueixaServiceImpl implements QueixaService {
 
     private static final AtomicLong counter = new AtomicLong();
 
-    private static List<Queixa> queixas;
+    //o array foi iniciado
+    private static List<Queixa> queixas = new ArrayList<Queixa>();
 
     static {
-        queixas = populateDummyQueixas();
+        //queixas = populateDummyQueixas();
     }
 
     private static List<Queixa> populateDummyQueixas() {
@@ -50,12 +51,11 @@ public class QueixaServiceImpl implements QueixaService {
         return queixas;
     }
 
-    public void saveQueixa(Queixa queixa) throws QueixaVaziaException {
+    public void saveQueixa(Queixa queixa){
     	if(queixa != null){
     		queixa.setId(counter.incrementAndGet());
     		queixas.add(queixa);    		
-    	}                                                           // fazer try catch
-    	throw new QueixaVaziaException("Queixa Nula ou vazia!");
+    	}                                                      
     }
 
     public void updateQueixa(Queixa queixa) {

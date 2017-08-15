@@ -18,7 +18,7 @@ public class Queixa {
 	private String comentario = ""; // usado na atualizacao da queixa
 
 	public Queixa(){
-		id=0;
+		id = 0;
 	}
 
 	public Queixa(long id, String descricao, SituacaoQueixa situacao, String comentario,
@@ -50,10 +50,12 @@ public class Queixa {
 	public SituacaoQueixa getSituacao() {
 		return situacao;
 	}
+	//a queixa se abre e fecha!?
 
 	public void abrir() throws ObjetoInvalidoException {
 		if (this.situacao != SituacaoQueixa.EM_ANDAMENTO)
 			this.situacao = SituacaoQueixa.ABERTA;
+			
 		else
 			throw new ObjetoInvalidoException("Status inválido");
 	}
