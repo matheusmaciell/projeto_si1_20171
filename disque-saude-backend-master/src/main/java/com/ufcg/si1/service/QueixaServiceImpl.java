@@ -20,7 +20,7 @@ public class QueixaServiceImpl implements QueixaService {
     private static List<Queixa> queixas = new ArrayList<Queixa>();
 
     static {
-        queixas = populateDummyQueixas();
+        //queixas = populateDummyQueixas();
     }
 
     private static List<Queixa> populateDummyQueixas() {
