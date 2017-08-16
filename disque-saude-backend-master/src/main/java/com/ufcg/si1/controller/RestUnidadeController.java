@@ -10,11 +10,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
-import com.ufcg.si1.state.SituacaoQueixa;
+import com.ufcg.si1.state.QueixaAberta;
 import com.ufcg.si1.util.*;
 
 
-import br.edu.ufcg.Hospital;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
 
@@ -106,7 +105,7 @@ public class RestUnidadeController {
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getSituacao() == SituacaoQueixa.ABERTA)
+            if (q.getEstado().equals(new QueixaAberta()))
                 contador++;
         }
 

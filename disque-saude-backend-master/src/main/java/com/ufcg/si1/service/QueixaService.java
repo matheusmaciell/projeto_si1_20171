@@ -6,11 +6,13 @@ import java.util.List;
 
 import com.ufcg.si1.model.Queixa;
 
+import exceptions.QueixaStatusException;
+
 public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
 	
-    void saveQueixa(Queixa queixa);
+    void saveQueixa(Queixa queixa) throws QueixaStatusException;
 
 	Queixa findById(long id);
 	
@@ -23,6 +25,12 @@ public interface QueixaService {
     int size();
 
 	Iterator<Queixa> getIterator();
+	
+	void abrirQueixa(Queixa queixa) throws QueixaStatusException ;
+	
+	void fecharQueixa(Queixa queixa, String coment) throws QueixaStatusException;
+	
+	void andamentoQueixa(Queixa queixa, String coment) throws QueixaStatusException;
 
 
 //	boolean isUserExist(Queixa user);

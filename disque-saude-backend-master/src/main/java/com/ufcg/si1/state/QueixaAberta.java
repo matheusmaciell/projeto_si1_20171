@@ -1,23 +1,22 @@
 package com.ufcg.si1.state;
 
+import exceptions.QueixaStatusException;
+
 public class QueixaAberta implements IQueixaState{
 
 	//Analisar a funcionalidade
 	@Override
-	public IQueixaState abrirQueixa() {
-		System.out.println("Queixa ja aberta!");
-		return this;
+	public IQueixaState estadoAberto() throws QueixaStatusException {
+		throw new QueixaStatusException("Queixa já está aberta!");
 	}
 
 	@Override
-	public IQueixaState fecharQueixa() {
-		System.out.println("Fechei uma nova queixa!");
+	public QueixaFechada estadoFechado() {
 		return new QueixaFechada();
 	}
 
 	@Override
-	public IQueixaState verificarQueixa() {
-		System.out.println("Queixa em andamento!");
+	public QueixaEmAndamento estadoEmAndamento() {
 		return new QueixaEmAndamento();
 	}
 
