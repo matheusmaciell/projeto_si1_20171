@@ -1,7 +1,7 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
-import exceptions.QueixaStatusException;
+import com.ufcg.si1.state.SituacaoQueixa;
 
 import org.springframework.stereotype.Service;
 
@@ -23,52 +23,40 @@ public class QueixaServiceImpl implements QueixaService {
         //queixas = populateDummyQueixas();
     }
 
-//    private static List<Queixa> populateDummyQueixas() {
-//        List<Queixa> queixas = new ArrayList<Queixa>();
-//
-//        queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
-//        		SituacaoQueixa.FECHADA, "", "Jose Silva",
-//                "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
-//
-//
-//        queixas.add(new Queixa(counter.incrementAndGet(),
-//                "Bacalhau estragado, passamos mal!", SituacaoQueixa.FECHADA, "",
-//                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
-//                "Joao Pessoa"));
-//
-//        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", SituacaoQueixa.FECHADA, "",
-//                "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
-//
-//
-//        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", SituacaoQueixa.FECHADA, "",
-//                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
-//                "Joao Pessoa"));
-//
-//        return queixas;
-//    }
+    private static List<Queixa> populateDummyQueixas() {
+        List<Queixa> queixas = new ArrayList<Queixa>();
+
+        queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
+        		SituacaoQueixa.FECHADA, "", "Jose Silva",
+                "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
+
+
+        queixas.add(new Queixa(counter.incrementAndGet(),
+                "Bacalhau estragado, passamos mal!", SituacaoQueixa.FECHADA, "",
+                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
+                "Joao Pessoa"));
+
+        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", SituacaoQueixa.FECHADA, "",
+                "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
+
+
+        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", SituacaoQueixa.FECHADA, "",
+                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
+                "Joao Pessoa"));
+
+        return queixas;
+    }
 
     public List<Queixa> findAllQueixas() {
         return queixas;
     }
 
-    public void saveQueixa(Queixa queixa) throws QueixaStatusException{
+    public void saveQueixa(Queixa queixa){
     	if(queixa != null){
     		queixa.setId(counter.incrementAndGet());
     		queixas.add(queixa);    		
     	}                                                      
     }
-    
-    public void abrirQueixa(Queixa queixa) throws QueixaStatusException {
-		queixa.abrir();
-	}
-
-	public void fecharQueixa(Queixa queixa, String coment) throws QueixaStatusException  {
-		queixa.fechar(coment);
-	}
-	
-	public void andamentoQueixa(Queixa queixa, String coment) throws QueixaStatusException {
-		queixa.andamento(coment);
-	}
 
     public void updateQueixa(Queixa queixa) {
         int index = queixas.indexOf(queixa);

@@ -2,9 +2,10 @@ package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
 
-import exceptions.QueixaStatusException;
+import exceptions.ObjetoInvalidoException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,10 +41,11 @@ public class RestQueixaController {
 	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) throws QueixaVaziaException {
 		try {
-			queixaService.saveQueixa(queixa);
-		} catch (QueixaStatusException e) {
+			queixa.abrir();
+		} catch (ObjetoInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		queixaService.saveQueixa(queixa);
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
 
@@ -96,8 +98,9 @@ public class RestQueixaController {
 	}
 
 	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar, @PathVariable("coment") String coment) throws QueixaStatusException {
-		queixaService.fecharQueixa(queixaAFechar, coment);
+	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
+		queixaAFechar.situacao = SituacaoQueixa.FECHADA;
+		queixaService.updateQueixa(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
 }

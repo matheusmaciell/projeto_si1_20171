@@ -1,9 +1,9 @@
 package com.ufcg.si1.model;
 
-import exceptions.QueixaStatusException;
+import exceptions.ObjetoInvalidoException;
+import org.springframework.http.ResponseEntity;
 
-import com.ufcg.si1.state.IQueixaState;
-import com.ufcg.si1.state.QueixaAberta;
+import com.ufcg.si1.state.SituacaoQueixa;
 
 public class Queixa {
 
@@ -13,7 +13,7 @@ public class Queixa {
 
 	private Pessoa solicitante;
 
-	public IQueixaState estadoQueixa;
+	public SituacaoQueixa situacao;
 	
 	private String comentario = ""; // usado na atualizacao da queixa
 
@@ -21,11 +21,12 @@ public class Queixa {
 		id = 0;
 	}
 
-	public Queixa(long id, String descricao, String comentario, String nome,
-					String email, String rua, String uf, String cidade) {
+	public Queixa(long id, String descricao, SituacaoQueixa situacao, String comentario,
+                  String nome, String email,
+				  String rua, String uf, String cidade) {
 		this.id = id;
 		this.descricao = descricao;
-		this.estadoQueixa = new QueixaAberta();
+		this.situacao = situacao;
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
@@ -46,27 +47,26 @@ public class Queixa {
 		this.descricao = descricao;
 	}
 
-	public IQueixaState getEstado() {
-		return estadoQueixa;
-	}
-	
-	public void setEstado(IQueixaState estado) {
-		this.estadoQueixa = estado;
+	public SituacaoQueixa getSituacao() {
+		return situacao;
 	}
 	//a queixa se abre e fecha!?
 
-	public void abrir() throws QueixaStatusException {
-		this.setEstado(this.estadoQueixa.estadoAberto());
+	public void abrir() throws ObjetoInvalidoException {
+		if (this.situacao != SituacaoQueixa.EM_ANDAMENTO)
+			this.situacao = SituacaoQueixa.ABERTA;
+			
+		else
+			throw new ObjetoInvalidoException("Status inválido");
 	}
 
-	public void fechar(String coment) throws QueixaStatusException {
-		this.setEstado(estadoQueixa.estadoFechado());
-		this.setComentario(coment);
-	}
-	
-	public void andamento(String coment) throws QueixaStatusException {
-		this.setEstado(estadoQueixa.estadoEmAndamento());
-		this.setComentario(coment);
+	public void fechar(String coment) throws ObjetoInvalidoException {
+		if (this.situacao == SituacaoQueixa.EM_ANDAMENTO
+				|| this.situacao == SituacaoQueixa.ABERTA) {
+			this.situacao = SituacaoQueixa.FECHADA;
+			this.comentario = coment;
+		} else
+			throw new ObjetoInvalidoException("Status Inválido");
 	}
 
 	public String getComentario() {

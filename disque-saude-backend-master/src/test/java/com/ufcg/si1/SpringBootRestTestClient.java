@@ -157,7 +157,7 @@ public class SpringBootRestTestClient {
 
         restTemplate.postForLocation(REST_SERVICE_URI+"/queixa/fechamento", queixa, Queixa.class);
         queixa = restTemplate.getForObject(REST_SERVICE_URI+"/queixa/"+i, Queixa.class);
-        System.out.println(queixa.estadoQueixa);
+        System.out.println(queixa.situacao);
 
     }
 
