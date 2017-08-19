@@ -1,4 +1,7 @@
-package com.ufcg.si1.model;
+package com.ufcg.si1.model.prefeitura;
+
+import com.ufcg.si1.model.situacao.Situacao;
+import com.ufcg.si1.model.situacao.SituacaoPrefeitura;
 
 public abstract class Prefeitura {
 	

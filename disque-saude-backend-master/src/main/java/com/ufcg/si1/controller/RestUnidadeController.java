@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.*;
+import com.ufcg.si1.model.prefeitura.Prefeitura;
+import com.ufcg.si1.model.prefeitura.PrefeituraNormal;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.*;
