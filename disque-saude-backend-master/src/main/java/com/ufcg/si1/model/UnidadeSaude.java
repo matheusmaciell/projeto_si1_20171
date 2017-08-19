@@ -23,20 +23,19 @@ public abstract class UnidadeSaude {
 
     private List<Especialidade> especialidades = new ArrayList();
 
-    private long [] numeroQueixas = new long[1000];
+    private List idsDeQueixas = new ArrayList();
     int contador = 0;
 
     public UnidadeSaude(String descricao) {
         this.codigo = 0; // gerado no repositorio
         this.descricao = descricao;
     }
-    public UnidadeSaude(){
+  
+	public UnidadeSaude(){
     }
 
     public void addQueixaProxima(long id) {
-        if (this instanceof PostoSaude){
-            numeroQueixas[contador++] = id;
-        }
+        idsDeQueixas.add(id);
     }
 
     public String pegaDescricao() {
@@ -67,44 +66,48 @@ public abstract class UnidadeSaude {
     
     public abstract float atendimentosDiarios();
     
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + codigo;
-		result = prime * result + contador;
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
-		result = prime * result + Arrays.hashCode(numeroQueixas);
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UnidadeSaude other = (UnidadeSaude) obj;
-		if (codigo != other.codigo)
-			return false;
-		if (contador != other.contador)
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (especialidades == null) {
-			if (other.especialidades != null)
-				return false;
-		} else if (!especialidades.equals(other.especialidades))
-			return false;
-		if (!Arrays.equals(numeroQueixas, other.numeroQueixas))
-			return false;
-		return true;
-	}
+    @Override
+  	public int hashCode() {
+  		final int prime = 31;
+  		int result = 1;
+  		result = prime * result + codigo;
+  		result = prime * result + contador;
+  		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+  		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
+  		result = prime * result + ((idsDeQueixas == null) ? 0 : idsDeQueixas.hashCode());
+  		return result;
+  	}
+  	@Override
+  	public boolean equals(Object obj) {
+  		if (this == obj)
+  			return true;
+  		if (obj == null)
+  			return false;
+  		if (getClass() != obj.getClass())
+  			return false;
+  		UnidadeSaude other = (UnidadeSaude) obj;
+  		if (codigo != other.codigo)
+  			return false;
+  		if (contador != other.contador)
+  			return false;
+  		if (descricao == null) {
+  			if (other.descricao != null)
+  				return false;
+  		} else if (!descricao.equals(other.descricao))
+  			return false;
+  		if (especialidades == null) {
+  			if (other.especialidades != null)
+  				return false;
+  		} else if (!especialidades.equals(other.especialidades))
+  			return false;
+  		if (idsDeQueixas == null) {
+  			if (other.idsDeQueixas != null)
+  				return false;
+  		} else if (!idsDeQueixas.equals(other.idsDeQueixas))
+  			return false;
+  		return true;
+  	}
     
+
     
 }

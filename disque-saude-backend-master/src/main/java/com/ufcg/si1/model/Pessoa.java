@@ -11,7 +11,6 @@ public class Pessoa  {
 
 
 	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
-		
 		this.endereco = new Endereco(rua, uf, cidade);
 		this.nome = nome;
 		this.email = email;
