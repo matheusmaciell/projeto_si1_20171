@@ -288,9 +288,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="com.ufcg.si1.model.situacao.SituacaoPrefeitura" 
+  <class id="30" language="java" name="com.ufcg.si1.model.prefeitura.SituacaoPrefeitura" 
     project="SpringBootRestApiExample" 
-    file="/SpringBootRestApiExample/src/main/java/com/ufcg/si1/model/situacao/SituacaoPrefeitura.java" binary="false" 
+    file="/SpringBootRestApiExample/src/main/java/com/ufcg/si1/model/prefeitura/SituacaoPrefeitura.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="131" width="209" x="5326" y="1861"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

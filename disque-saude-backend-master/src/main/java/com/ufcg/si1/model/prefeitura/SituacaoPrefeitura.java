@@ -1,5 +1,9 @@
-package com.ufcg.si1.model.situacao;
+package com.ufcg.si1.model.prefeitura;
 
+import com.ufcg.si1.model.situacao.Situacao;
+import com.ufcg.si1.model.situacao.SituacaoBoa;
+import com.ufcg.si1.model.situacao.SituacaoRegular;
+import com.ufcg.si1.model.situacao.SituacaoRuim;
 
 public class SituacaoPrefeitura {
 	private double quoeficienteRuim;
