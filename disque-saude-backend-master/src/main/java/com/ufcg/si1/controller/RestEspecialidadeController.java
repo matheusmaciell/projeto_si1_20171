@@ -1,8 +1,6 @@
 package com.ufcg.si1.controller;
 
 
-import java.util.List;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +19,13 @@ import exceptions.Rep;
 @CrossOrigin
 public class RestEspecialidadeController {
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-	 /* situação normal =0
-     situação extra =1
-	  */
-	
 	 EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 
 	@RequestMapping(value = "/porUnidadeSaude/", method = RequestMethod.GET)
     public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
 
-        Object us = null;
+        UnidadeSaude us = null;
         try {
             us = unidadeSaudeService.procura(codigoUnidadeSaude);
         } catch (Rep e) {
@@ -39,22 +33,11 @@ public class RestEspecialidadeController {
         } catch (ObjetoInexistenteException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (us instanceof UnidadeSaude){
-            UnidadeSaude us1 = (UnidadeSaude) us;
-            return new ResponseEntity<>(us1.getEspecialidades(), HttpStatus.OK);
+        if (us != null){
+            return new ResponseEntity<>(us.getEspecialidades(), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @RequestMapping(value = "/getUnidades/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllUnidades() {
-        List<UnidadeSaude> unidades = unidadeSaudeService.getAll();
-        if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        else{
-           
-            return new ResponseEntity<>(unidades, HttpStatus.OK);
-        }
     }
 
     @RequestMapping(value = "/incluirEspecialidade/", method = RequestMethod.POST)

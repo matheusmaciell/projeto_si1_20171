@@ -18,7 +18,7 @@ app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
     $scope.situation = "";
 
     var getGeneralSituationComplaints = function (neighborhood) {
-         $http.get("http://localhost:5000/SpringBootRestApi/unidadeSaude/situacaoGeralQueixas/")
+         $http.get("http://localhost:5000/SpringBootRestApi/queixa/situacaoGeralQueixas/")
             .then(function success(response) {
                 console.log(response.data);
 

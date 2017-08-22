@@ -1,6 +1,9 @@
 package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
+import com.ufcg.si1.model.prefeitura.Prefeitura;
+import com.ufcg.si1.model.prefeitura.PrefeituraNormal;
+import com.ufcg.si1.model.situacao.Situacao;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
@@ -12,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -20,6 +24,7 @@ import java.util.List;
 public class RestQueixaController {
 
 	QueixaService queixaService = new QueixaServiceImpl();
+	Prefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
 
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
@@ -67,6 +72,14 @@ public class RestQueixaController {
 		}
 		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/situacaoGeralQueixas/", method = RequestMethod.GET)
+    public ResponseEntity<?> getSituacaoGeralQueixas() {
+
+        Situacao situacao = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
+
+        return new ResponseEntity<>(situacao, HttpStatus.OK);
+    }
 
 	@RequestMapping(value = "/updateQueixaID/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateQueixa(@PathVariable("id") long id, @RequestBody Queixa queixa) {

@@ -106,4 +106,17 @@ public class QueixaServiceImpl implements QueixaService {
     	return null;
     }
 
+	@Override
+	public double numeroQueixasAbertas() {
+        int contador = 0;
+        Iterator<Queixa> it = this.getIterator();
+        for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
+            Queixa q = it1.next();
+            if (q.getSituacao() == SituacaoQueixa.ABERTA)
+                contador++;
+        }
+
+        return (double)contador;
+    }
+
 }
