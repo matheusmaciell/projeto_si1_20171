@@ -20,7 +20,6 @@ import exceptions.Rep;
 public class RestEspecialidadeController {
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 	 EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
-	 QueixaService queixaService = new QueixaServiceImpl();
 	 
 	@RequestMapping(value = "/porUnidadeSaude/", method = RequestMethod.GET)
     public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {

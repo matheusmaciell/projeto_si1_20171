@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.ufcg.si1.model.Queixa;
 
+import exceptions.ObjetoInvalidoException;
+
 public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
@@ -16,7 +18,7 @@ public interface QueixaService {
 	
 	Queixa findByName(String name);
 
-	void updateQueixa(Queixa user);
+	void updateQueixa(long id, Queixa user);
 
 	void deleteQueixaById(long id);
 
@@ -25,6 +27,8 @@ public interface QueixaService {
 	Iterator<Queixa> getIterator();
 
 	double numeroQueixasAbertas();
+
+	void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException;
 
 
 //	boolean isUserExist(Queixa user);

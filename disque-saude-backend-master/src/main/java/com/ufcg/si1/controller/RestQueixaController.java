@@ -5,7 +5,6 @@ import com.ufcg.si1.model.prefeitura.Prefeitura;
 import com.ufcg.si1.model.prefeitura.PrefeituraNormal;
 import com.ufcg.si1.model.situacao.Situacao;
 import com.ufcg.si1.service.*;
-import com.ufcg.si1.state.SituacaoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
@@ -15,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -84,18 +82,13 @@ public class RestQueixaController {
 	@RequestMapping(value = "/updateQueixaID/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateQueixa(@PathVariable("id") long id, @RequestBody Queixa queixa) {
 
-		Queixa currentQueixa = queixaService.findById(id);
-
-		if (currentQueixa == null) {
-			return new ResponseEntity<>(new CustomErrorType("Unable to upate. Queixa with id " + id + " not found."),
+		if (this.queixaService.findById(id) == null) {
+			return new ResponseEntity<>(new CustomErrorType("Unable to update. Queixa with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-
-		currentQueixa.setDescricao(queixa.getDescricao());
-		currentQueixa.setComentario(queixa.getComentario());
-
-		queixaService.updateQueixa(currentQueixa);
-		return new ResponseEntity<Queixa>(currentQueixa, HttpStatus.OK);
+		
+		queixaService.updateQueixa(id, queixa);
+		return new ResponseEntity<Queixa>(this.queixaService.findById(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/deletarQueixaID/{id}", method = RequestMethod.DELETE)
@@ -112,8 +105,13 @@ public class RestQueixaController {
 
 	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
-		queixaAFechar.situacao = SituacaoQueixa.FECHADA;
-		queixaService.updateQueixa(queixaAFechar);
+		
+		try {
+			queixaService.fecharQueixa(queixaAFechar);
+		} catch (ObjetoInvalidoException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
 }

@@ -3,6 +3,8 @@ package com.ufcg.si1.service;
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.state.SituacaoQueixa;
 
+import exceptions.ObjetoInvalidoException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,9 +60,19 @@ public class QueixaServiceImpl implements QueixaService {
     	}                                                      
     }
 
-    public void updateQueixa(Queixa queixa) {
+    public void updateQueixa(long id, Queixa queixa) {
+    	Queixa currentQueixa = this.findById(id);
+    	
+    	currentQueixa.setDescricao(queixa.getDescricao());
+		currentQueixa.setComentario(queixa.getComentario());
+		
         int index = queixas.indexOf(queixa);
         queixas.set(index, queixa);
+    }
+    
+    @Override
+    public void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException {
+    	queixaAFechar.fechar(queixaAFechar.getComentario());    	
     }
 
     public void deleteQueixaById(long id) {
@@ -118,5 +130,6 @@ public class QueixaServiceImpl implements QueixaService {
 
         return (double)contador;
     }
+
 
 }
