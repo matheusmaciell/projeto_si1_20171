@@ -4,14 +4,12 @@ public class Pessoa  {
 	
 	private String nome;
 	private String email;
-	private Endereco endereco;
 	
 	public Pessoa(){
 	}
 
 
-	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
-		this.endereco = new Endereco(rua, uf, cidade);
+	public Pessoa(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
 	}
@@ -33,22 +31,11 @@ public class Pessoa  {
 	}
 
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -68,11 +55,6 @@ public class Pessoa  {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -80,8 +62,6 @@ public class Pessoa  {
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
 }

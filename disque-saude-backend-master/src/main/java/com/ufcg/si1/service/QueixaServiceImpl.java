@@ -1,7 +1,7 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.state.SituacaoQueixa;
+import com.ufcg.si1.state.EstadoQueixa;
 
 import exceptions.ObjetoInvalidoException;
 
@@ -29,20 +29,20 @@ public class QueixaServiceImpl implements QueixaService {
         List<Queixa> queixas = new ArrayList<Queixa>();
 
         queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
-        		SituacaoQueixa.FECHADA, "", "Jose Silva",
+        		EstadoQueixa.FECHADA, "", "Jose Silva",
                 "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
         queixas.add(new Queixa(counter.incrementAndGet(),
-                "Bacalhau estragado, passamos mal!", SituacaoQueixa.FECHADA, "",
+                "Bacalhau estragado, passamos mal!", EstadoQueixa.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", SituacaoQueixa.FECHADA, "",
+        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", EstadoQueixa.FECHADA, "",
                 "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", SituacaoQueixa.FECHADA, "",
+        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", EstadoQueixa.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
@@ -124,7 +124,7 @@ public class QueixaServiceImpl implements QueixaService {
         Iterator<Queixa> it = this.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
             Queixa q = it1.next();
-            if (q.getSituacao() == SituacaoQueixa.ABERTA)
+            if (q.getSituacao() == EstadoQueixa.ABERTA)
                 contador++;
         }
 

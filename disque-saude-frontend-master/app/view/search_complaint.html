@@ -22,14 +22,17 @@
             <div class="row" ng-if="complaint">
                 <div class="col-lg-12">
                     <h2 class="text-info">{{complaint.descricao}}</h2>
-                    <p>Situação: <span class="badge">{{complaint.situacao}}</span></p>
+                    <p>Situação: <span class="badge">{{complaint.estado}}</span></p>
                     <p>Solicitante</p>
                     <ul class="list-group">
                         <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
                         <li class="list-group-item"><b>Email: </b> {{complaint.solicitante.email}}</li>
-                        <li class="list-group-item"><b>Rua: </b> {{complaint.solicitante.endereco.rua}}</li>
-                        <li class="list-group-item"><b>Cidade: </b> {{complaint.solicitante.endereco.cidade}}</li>
-                        <li class="list-group-item"><b>UF: </b> {{complaint.solicitante.endereco.uf}}</li>
+                    </ul>
+                    <p>Estabelecimento</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Rua: </b> {{complaint.estabelecimento.rua}}</li>
+                        <li class="list-group-item"><b>Cidade: </b> {{complaint.estabelecimento.cidade}}</li>
+                        <li class="list-group-item"><b>UF: </b> {{complaint.estabelecimento.uf}}</li>
                     </ul>
                     <hr>
                 </div>

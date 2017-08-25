@@ -12,6 +12,9 @@
                     <li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
                     <li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
                     <li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</li>
+                    <button class="btn btn-primary" type="button" name="button" ng-show="logado == true" ng-click="deslogar()">{{administrador.nome}}</button>
+                    <button class="btn btn-primary" type="button" name="button" ng-show="logado == false" ng-click="cadastrar()">Sign Up</button>
+                    <button class="btn btn-primary" type="button" name="button" ng-show="logado == false" ng-click="logar()">Sign In</button>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>

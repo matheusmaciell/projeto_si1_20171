@@ -2,7 +2,7 @@ package com.ufcg.si1.model;
 
 import exceptions.ObjetoInvalidoException;
 
-import com.ufcg.si1.state.SituacaoQueixa;
+import com.ufcg.si1.state.EstadoQueixa;
 
 public class Queixa {
 
@@ -12,7 +12,9 @@ public class Queixa {
 
 	private Pessoa solicitante;
 
-	public SituacaoQueixa situacao;
+	private Endereco estabelecimento;
+	
+	private EstadoQueixa estado;
 	
 	private String comentario = ""; // usado na atualizacao da queixa
 
@@ -20,14 +22,15 @@ public class Queixa {
 		id = 0;
 	}
 
-	public Queixa(long id, String descricao, SituacaoQueixa situacao, String comentario,
+	public Queixa(long id, String descricao, EstadoQueixa estado, String comentario,
                   String nome, String email,
 				  String rua, String uf, String cidade) {
 		this.id = id;
 		this.descricao = descricao;
-		this.situacao = situacao;
+		this.estado = estado;
 		this.comentario = comentario;
-		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
+		this.solicitante = new Pessoa(nome, email);
+		this.estabelecimento = new Endereco(rua, uf, cidade);
 	}
 
 	public long getId() {
@@ -46,23 +49,23 @@ public class Queixa {
 		this.descricao = descricao;
 	}
 
-	public SituacaoQueixa getSituacao() {
-		return situacao;
+	public EstadoQueixa getSituacao() {
+		return estado;
 	}
 	//a queixa se abre e fecha!?
 
 	public void abrir() throws ObjetoInvalidoException {
-		if (this.situacao != SituacaoQueixa.EM_ANDAMENTO)
-			this.situacao = SituacaoQueixa.ABERTA;
+		if (this.estado != EstadoQueixa.EM_ANDAMENTO)
+			this.estado = EstadoQueixa.ABERTA;
 			
 		else
 			throw new ObjetoInvalidoException("Status inválido");
 	}
 
 	public void fechar(String coment) throws ObjetoInvalidoException {
-		if (this.situacao == SituacaoQueixa.EM_ANDAMENTO
-				|| this.situacao == SituacaoQueixa.ABERTA) {
-			this.situacao = SituacaoQueixa.FECHADA;
+		if (this.estado == EstadoQueixa.EM_ANDAMENTO
+				|| this.estado == EstadoQueixa.ABERTA) {
+			this.estado = EstadoQueixa.FECHADA;
 			this.comentario = coment;
 		} else
 			throw new ObjetoInvalidoException("Status Inválido");
@@ -82,6 +85,22 @@ public class Queixa {
 
 	public void setSolicitante(Pessoa solicitante) {
 		this.solicitante = solicitante;
+	}
+
+	public Endereco getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(Endereco estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
+	public EstadoQueixa getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoQueixa estado) {
+		this.estado = estado;
 	}
 
 	@Override
