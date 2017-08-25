@@ -12,9 +12,10 @@
                     <li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
                     <li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
                     <li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</li>
+                    <li><a href="#!login" data-toggle="modal" data-target="#Login"> Login </li>
                     <button class="btn btn-primary" type="button" name="button" ng-show="logado == true" ng-click="deslogar()">{{administrador.nome}}</button>
                     <button class="btn btn-primary" type="button" name="button" ng-show="logado == false" ng-click="cadastrar()">Sign Up</button>
-                    <button class="btn btn-primary" type="button" name="button" ng-show="logado == false" ng-click="logar()">Sign In</button>
+                    <button class="btn btn-primary" type="button" name="button" ng-show="logado == false" ng-click="logar(userName, userEmail, userPassword)">Sign In</button>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -25,4 +26,35 @@
             </nav>
         </div>
     </div>
+</div>
+
+<!-- Modal Login-->
+<div class="modal fade" id="Login" role="dialog">
+  <div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Login</h4>
+  </div>
+  <div class="modal-body">
+          <div>
+            <b>Email:</b>
+            <input ng-model="userEmail" placeholder="myemail@domain.com">
+          </div>
+          <div>
+            <b>Username:</b>
+            <input ng-model="userName" placeholder="My Name">
+          </div>
+          <div>
+            <b>Password:</b>
+            <input ng-model="userPassword" placeholder="My Password">
+          </div>
+
+        </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="logar(userName, userEmail, userPassword)">Save</button>
+  </div>
 </div>

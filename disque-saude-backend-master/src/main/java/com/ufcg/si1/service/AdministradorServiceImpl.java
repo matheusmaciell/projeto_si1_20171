@@ -15,7 +15,7 @@ public class AdministradorServiceImpl {
 	
 	public Administrador cadastrar(Administrador adm) {
 		if (administradores.containsKey(adm.getEmail())) {
-			return null;
+			return null; // lançar excessao
 		}
 		return administradores.put(adm.getEmail(), adm);
 	}
@@ -24,14 +24,14 @@ public class AdministradorServiceImpl {
 		return logar(adm.getEmail(), adm.getSenha());
 	}
 	
-	public Administrador logar(String email, String senha) {
+	private Administrador logar(String email, String senha) {
 		if (administradores.containsKey(email)) {
 			if(administradores.get(email).getSenha().equals(senha)) {
 				return administradores.get(email);
 			}
 		}
 		
-		return null;
+		return null; // lançar excessao
 	}
 
 }

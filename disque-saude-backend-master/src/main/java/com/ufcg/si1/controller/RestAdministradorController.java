@@ -18,7 +18,7 @@ public class RestAdministradorController {
 	
 	AdministradorServiceImpl administradorService = new AdministradorServiceImpl();
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<Administrador> cadastrar(@RequestBody Administrador adm) {
 		Administrador admCadastrado = administradorService.cadastrar(adm);
 		if (adm == null) {

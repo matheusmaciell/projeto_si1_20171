@@ -20,7 +20,7 @@ angular.module("vs").controller("catalogoSeriesCtrl", function($scope, $http){
      });
    };
 
-   $scope.logar = function() {
+   $scope.logar = function(nome, email, senha) {
      var emailLogin = prompt("Email:", "email@email.com");
      var senhaLogin = prompt("Password:", "***********");
      var admLogin = {nome: "", email: emailLogin, senha: senhaLogin};
