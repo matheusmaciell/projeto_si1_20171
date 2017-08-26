@@ -1,26 +1,30 @@
 app.controller("AdmCtrl", function($scope, $http){
-  $scope.app = "SI-LAB03"; // mudar esta string
   $scope.logado = false;
   $scope.actualAdm;
 
-  $scope.cadastrar = function(nomeCadastro, emailCadastro, senhaCadastro){
+  $scope.cadastrar = function(complaint){
     // var nomeCadastro = prompt("Name:", "Seu nome")
     // var emailCadastro = prompt("Email:", "email@email.com");    utilizar isto, caso o modal nao funcione corretamente
     // var senhaCadastro = prompt("Password:", "***********");
     
-    var admCadastrado = {"nome": nomeCadastro, "email": emailCadastro, "senha": senhaCadastro};
+    //var admCadastrado = {"nome": nomeCadastro, "email": emailCadastro, "senha": senhaCadastro};
 
-    console.log("aqui")
+   
+
+    //console.log(admCadastrado)
     
-    var promise = $http.get("http://localhost:5000/SpringBootRestApi/administrador/cadastrar",admCadastrado).then(function(response) {
-      if (response.data === "") {
+    var promise = $http.post("http://localhost:5000/SpringBootRestApi/administrador/cadastrar", JSON.stringify(complaint)).then(function(response) {
+       console.log(response)
+      if (response.config.data === "") {
         alert("Email ja cadastrado!");
       } else {
-        $scope.actualAdm = response.data;
+        $scope.actualAdm = response.config.data;
         $scope.logado = true;
+        alert("Email cadastrado com sucesso!")
       }
     }, function error (error) {
-      console.log(error);
+       
+        //console.log(error);
     });
   }
 

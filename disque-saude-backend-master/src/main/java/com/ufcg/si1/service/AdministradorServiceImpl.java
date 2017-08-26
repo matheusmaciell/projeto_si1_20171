@@ -3,8 +3,11 @@ package com.ufcg.si1.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.ufcg.si1.model.Administrador;
 
+@Service("AdministradorService")
 public class AdministradorServiceImpl {
 	
 	private Map<String, Administrador> administradores;
@@ -15,7 +18,7 @@ public class AdministradorServiceImpl {
 	
 	public Administrador cadastrar(Administrador adm) {
 		if (administradores.containsKey(adm.getEmail())) {
-			return null; // lançar excessao
+			return null; 
 		}
 		return administradores.put(adm.getEmail(), adm);
 	}

@@ -20,6 +20,8 @@ public class RestAdministradorController {
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<Administrador> cadastrar(@RequestBody Administrador adm) {
+		System.out.println(adm.getEmail());
+		
 		Administrador admCadastrado = administradorService.cadastrar(adm);
 		if (adm == null) {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
