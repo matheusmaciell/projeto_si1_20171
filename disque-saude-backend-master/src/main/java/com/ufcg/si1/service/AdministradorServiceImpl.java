@@ -23,18 +23,10 @@ public class AdministradorServiceImpl {
 		return administradores.put(adm.getEmail(), adm);
 	}
 	
-	public Administrador logar(Administrador adm) {
-		return logar(adm.getEmail(), adm.getSenha());
+	public Administrador logar(String email) {
+		return administradores.get(email);
 	}
 	
-	private Administrador logar(String email, String senha) {
-		if (administradores.containsKey(email)) {
-			if(administradores.get(email).getSenha().equals(senha)) {
-				return administradores.get(email);
-			}
-		}
-		
-		return null; // lançar excessao
-	}
+	
 
 }

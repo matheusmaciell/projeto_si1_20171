@@ -20,7 +20,7 @@ public class RestAdministradorController {
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<Administrador> cadastrar(@RequestBody Administrador adm) {
-		System.out.println(adm.getEmail());
+		//System.out.println(adm.getEmail());
 		
 		Administrador admCadastrado = administradorService.cadastrar(adm);
 		if (adm == null) {
@@ -30,8 +30,9 @@ public class RestAdministradorController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Administrador> logar(@RequestBody Administrador adm) {
-		adm = administradorService.logar(adm);
+	public ResponseEntity<Administrador> logar(@RequestBody String email) {
+		System.out.println("entrou aqui");
+		Administrador adm = administradorService.logar(email);
 		if (adm == null) {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}

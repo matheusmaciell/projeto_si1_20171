@@ -28,15 +28,14 @@ app.controller("AdmCtrl", function($scope, $http){
     });
   }
 
-  $scope.login = function (emailLogin, senhaLogin) {
-    // var emailLogin = prompt("Email:", "email@email.com");
-    // var senhaLogin = prompt("Password:", "***********");     somente usar caso o modal nao funcione
-
-    var admLogin = {nome: "", email: emailLogin, senha: senhaLogin};
-
-    var promise = $http.post("/administrador/login", admLogin).then(function(response) {
-      $scope.actualAdm = response.data;
+  $scope.login = function (userEmail, userPassword) {
+  
+    var promise = $http.post("http://localhost:5000/SpringBootRestApi/administrador/login", userEmail).then(function(response) {
+      if(response.data.senha === userPassword){
+        alert("Logado")
+        $scope.actualAdm = response.data;
       $scope.logado = true;
+      }  
     }, function error (error) {
       alert("Login incorreto!");
       console.log(error);
