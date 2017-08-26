@@ -12,8 +12,10 @@
                     <li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
                     <li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
                     <li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</li>
+
                     <li><a href="#!cadastro" data-toggle="modal" data-target="#Cadastro"> Cadastro </li>
                     <li><a href="#!login" data-toggle="modal" data-target="#Login"> Login </li>
+                    <li><a href="#!logout" data-target="#Logout" ng-click="logout()"> Logout </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -52,14 +54,12 @@
 
         </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" ng-click="cadastrar(userName, userEmail, userPassword)">Save</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="cadastrar(userName, userEmail, userPassword)">Cadastrar</button>
   </div>
 </div>
 </div>
 </div>
-
-
 
 <!-- Modal Login-->
 <div class="modal fade" id="Login" role="dialog">
@@ -83,8 +83,8 @@
 
         </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" ng-click="logar(userEmail, userPassword)">Save</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="logar(userEmail, userPassword)">Login</button>
   </div>
 </div>
 </div>

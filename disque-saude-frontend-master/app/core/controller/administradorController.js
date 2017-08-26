@@ -1,64 +1,45 @@
 angular.module("vs").controller("catalogoSeriesCtrl", function($scope, $http){
-  $scope.app = "SI-LAB03";
+  $scope.app = "SI-LAB03"; // mudar esta string
   $scope.logado = false;
-  $scope.actualUser;
+  $scope.actualAdm;
 
-  $scope.cadastrar = function(userName, userEmail, userPassword){
-    if(existeUsuario(userEmail)){
-      alert("User already exists!");
-    }
-    else {
-      var user = new Object();
-      user.name = userName;
-      user.email = userEmail;
-      user.password = userPassword;
+  $scope.cadastrar = function(nomeCadastro, emailCadastro, senhaCadastro){
+    // var nomeCadastro = prompt("Name:", "Seu nome")
+    // var emailCadastro = prompt("Email:", "email@email.com");    utilizar isto, caso o modal nao funcione corretamente
+    // var senhaCadastro = prompt("Password:", "***********");
+    
+    var admCadastrado = {"nome": nomeCadastro, "email": emailCadastro, "senha": senhaCadastro};
 
-      $scope.administradores.put(user); // colocar o novo usuario no map, atraves de requiçao
-
-      alert("Successful Registration!");
-    }
-  }
-
-  var existeUsuario = function(userEmail) {
-        for(var i = 0; i < $scope.administradores.length; i++) {
-          if($scope.administradores[i].email == userEmail) { // pegar no mapa do service por meio de requisiçao
-            return true;
-          }
-        }
-        return false;
-  };
-
-  $scope.login = function (userEmail, userPassword) {
-    if($scope.actualUser == null) {
-      if(getUsuario(userEmail).password == userPassword){
-        $scope.actualUser = getUsuario(userEmail); // colocar no atual, buscado por requisição do mapa do service
-        alert("Successful login!");
+    var promise = $http.post("/administrador", admCadastrado).then(function(response) {
+      if (response.data === "") {
+        alert("Email ja cadastrado!");
+      } else {
+        $scope.actualAdm = response.data;
+        $scope.logado = true;
       }
-      else {
-        alert("Wrong password! Try again!");
-      }
-    }
-    else {
-      alert("User already logged! Try to logout first!");
-    }
+    }, function error (error) {
+      console.log(error);
+    });
   }
 
-  var getUsuario = function(userEmail) {
-        for(var i = 0; i < $scope.administradores.length; i++) {
-          if($scope.administradores[i].email == userEmail) { // pegar no mapa do service por meio de requisiçao
-            return $scope.users[i];
-          }
-        }
-        return null;
-  };
+  $scope.login = function (emailLogin, senhaLogin) {
+    // var emailLogin = prompt("Email:", "email@email.com");
+    // var senhaLogin = prompt("Password:", "***********");     somente usar caso o modal nao funcione
 
-  $scope.logout = function () {
-    if($scope.actualUser != null) {
-      $scope.actualUser = null;
+    var admLogin = {nome: "", email: emailLogin, senha: senhaLogin};
 
-      alert("Successful logout!");
-    }
-    else {
-      alert("No user logged! Try to loggin first!");
-    }
+    var promise = $http.post("/administrador/login", admLogin).then(function(response) {
+      $scope.actualAdm = response.data;
+      $scope.logado = true;
+    }, function error (error) {
+      alert("Login incorreto!");
+      console.log(error);
+    });
   }
+
+
+  $scope.deslogar = function() {
+    if (confirm("DESLOGAR?")) {
+    $scope.actualAdm = null;
+    $scope.logado = false;
+ }
