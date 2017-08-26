@@ -45,20 +45,20 @@ public class RestUnidadeController {
     @RequestMapping(value = "/consultaUnidadeID/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) {
 
-        Object us = unidadeSaudeService.findById(id);
-        if (us == null) {
+        UnidadeSaude unidadeSaudeEncontradaId = unidadeSaudeService.findById(id);
+        if (unidadeSaudeEncontradaId == null) {
             return new ResponseEntity<>(new CustomErrorType("Unidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(us, HttpStatus.OK);
+        return new ResponseEntity<>(unidadeSaudeEncontradaId, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/getUnidades/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
         List<UnidadeSaude> unidades = unidadeSaudeService.getAll();
-        if (unidades.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (unidades.isEmpty()) 
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else{
-           
             return new ResponseEntity<>(unidades, HttpStatus.OK);
         }
     }
@@ -67,28 +67,28 @@ public class RestUnidadeController {
     @RequestMapping(value = "/mediaPacienteMedicoPorDia/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
 
-        UnidadeSaude unidade = unidadeSaudeService.findById(id);
+        UnidadeSaude unidadeSaudeEncontradaName = unidadeSaudeService.findById(id);
 
-        if(unidade == null){
+        if(unidadeSaudeEncontradaName == null){
             return new ResponseEntity<ObjWrapper<Double>>(HttpStatus.NOT_FOUND);
         }
 
-        double c = 0.0;
+        double calculo = 0.0;
         
-        c = unidade.getNumeroFuncionarios() / unidade.atendimentosDiarios();
+        calculo = unidadeSaudeEncontradaName.getNumeroFuncionarios() / unidadeSaudeEncontradaName.atendimentosDiarios();
         
-        return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(c)), HttpStatus.OK);
+        return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(calculo)), HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidadesSaudeBairro/", method= RequestMethod.GET)
     public ResponseEntity<?> consultarUnidadeSaudePorBairro(@RequestParam(value = "bairro", required = true) String bairro){
-        Object us = unidadeSaudeService.findByBairro(bairro);
-        if (us == null && !(us instanceof UnidadeSaude)) {
+         UnidadeSaude unidadeSaudeEncontradaNoBairro = unidadeSaudeService.findByBairro(bairro);
+        if (unidadeSaudeEncontradaNoBairro == null && !(unidadeSaudeEncontradaNoBairro instanceof UnidadeSaude)) {
             return new ResponseEntity<>(new CustomErrorType("Unidade with bairro " + bairro
                     + " not found"), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<UnidadeSaude>((UnidadeSaude) us, HttpStatus.OK);
+        return new ResponseEntity<UnidadeSaude>((UnidadeSaude) unidadeSaudeEncontradaNoBairro, HttpStatus.OK);
     }
 
     

@@ -54,29 +54,29 @@ public class RestQueixaController {
 
 	@RequestMapping(value = "/consultarQueixaID/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixaID(@PathVariable("id") long id) {
-		Queixa q = queixaService.findById(id);
-		if (q == null) {
+		Queixa queixaEncontradaId = queixaService.findById(id);
+		if (queixaEncontradaId == null) {
 			return new ResponseEntity<>(new CustomErrorType("Queixa with id " + id + " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
+		return new ResponseEntity<Queixa>(queixaEncontradaId, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/consultarQueixaNome/{nome}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixaNome(@PathVariable("nome") String nome) {
 
-		Queixa q = queixaService.findByName(nome);
-		if (q == null) {
+		Queixa queixaEncontradaName = queixaService.findByName(nome);
+		if (queixaEncontradaName == null) {
 			return new ResponseEntity<>(new CustomErrorType("Queixa with nome " + nome + " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
+		return new ResponseEntity<Queixa>(queixaEncontradaName, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/situacaoGeralQueixas/", method = RequestMethod.GET)
     public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-        Situacao situacao = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
+        Situacao situacaoAtual = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
 
-        return new ResponseEntity<>(situacao, HttpStatus.OK);
+        return new ResponseEntity<>(situacaoAtual, HttpStatus.OK);
     }
 
 	@RequestMapping(value = "/updateQueixaID/{id}", method = RequestMethod.PUT)
@@ -94,8 +94,8 @@ public class RestQueixaController {
 	@RequestMapping(value = "/deletarQueixaID/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
 
-		Queixa user = queixaService.findById(id);
-		if (user == null) {
+		Queixa queixaEncontradaId = queixaService.findById(id);
+		if (queixaEncontradaId == null) {
 			return new ResponseEntity<>(new CustomErrorType("Unable to delete. Queixa with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
