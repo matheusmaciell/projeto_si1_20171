@@ -1,0 +1,14 @@
+.login-field {
+	border-radius: 4px;
+}
+
+#login {
+	width: 30%;
+	margin-right: 2px;
+	display: inline-block;
+}
+
+#register {
+	width: 30%;
+	display: inline-block;
+}

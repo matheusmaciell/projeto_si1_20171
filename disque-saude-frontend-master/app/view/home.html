@@ -1,0 +1,39 @@
+<div class="container center">
+    <div class="jumbotron" id="register">
+        <div class="login">
+          <div>
+            <b>Email:</b>
+            <input ng-model="userEmail" placeholder="myemail@domain.com" class="login-field">
+          </div>
+          <br />
+          <div>
+            <b>Password:</b>
+            <input ng-model="userPassword" placeholder="Password" class="login-field">
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="cadastrar(userName, userEmail, userPassword)">Log In</button>
+      </div>
+    </div>
+
+     <div class="jumbotron" id="register">
+          <div>
+            <b>Email:</b>
+            <input ng-model="userEmail" placeholder="myemail@domain.com">
+          </div>
+          <div>
+            <b>Username:</b>
+            <input ng-model="userName" placeholder="My Name">
+          </div>
+          <div>
+            <b>Password:</b>
+            <input ng-model="userPassword" placeholder="My Password">
+          </div>
+
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="cadastrar(userName, userEmail, userPassword)">Cadastrar</button>
+  </div>
+    </div>
+
+</div>
