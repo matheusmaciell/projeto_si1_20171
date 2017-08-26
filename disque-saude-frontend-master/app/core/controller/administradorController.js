@@ -1,4 +1,4 @@
-angular.module("vs").controller("catalogoSeriesCtrl", function($scope, $http){
+app.controller("AdmCtrl", function($scope, $http){
   $scope.app = "SI-LAB03"; // mudar esta string
   $scope.logado = false;
   $scope.actualAdm;
@@ -10,7 +10,9 @@ angular.module("vs").controller("catalogoSeriesCtrl", function($scope, $http){
     
     var admCadastrado = {"nome": nomeCadastro, "email": emailCadastro, "senha": senhaCadastro};
 
-    var promise = $http.post("/administrador", admCadastrado).then(function(response) {
+    console.log("aqui")
+    
+    var promise = $http.get("http://localhost:5000/SpringBootRestApi/administrador/cadastrar",admCadastrado).then(function(response) {
       if (response.data === "") {
         alert("Email ja cadastrado!");
       } else {
@@ -43,3 +45,5 @@ angular.module("vs").controller("catalogoSeriesCtrl", function($scope, $http){
     $scope.actualAdm = null;
     $scope.logado = false;
  }
+}
+});

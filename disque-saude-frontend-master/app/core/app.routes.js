@@ -1,6 +1,9 @@
 app.config(function ($routeProvider) {
     $routeProvider.when("/",{
-        templateUrl: "view/search.html"
+        templateUrl: "view/home.html"
+    }).when("/cadastro",{
+        templateUrl: "view/cadastro.html",
+        controller : "AdmCtrl",
     }).when("/complaint/register", {
         templateUrl: "view/registerComplaint.html",
         controller : "registerComplaintCtrl",
