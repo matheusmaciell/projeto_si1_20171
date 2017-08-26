@@ -26,6 +26,9 @@ app.config(function ($routeProvider) {
     }).when("/generalSituationComplaints", {
         templateUrl : "view/generalSituationComplaints.html",
         controller : "generalSituationComplaintsCtrl"
+    }).when("/adminArea", {
+        templateUrl: "view/adminArea.html",
+        controller: "AdmCtrl"
     }).otherwise({
         redirectTo: '/'
     });

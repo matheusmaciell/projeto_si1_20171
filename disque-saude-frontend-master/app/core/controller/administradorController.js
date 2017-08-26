@@ -35,6 +35,7 @@ app.controller("AdmCtrl", function($scope, $http){
         alert("Logado")
         $scope.actualAdm = response.data;
       $scope.logado = true;
+      window.location.assign("http://localhost:8000/#!/adminArea");
       }  
     }, function error (error) {
       alert("Login incorreto!");
