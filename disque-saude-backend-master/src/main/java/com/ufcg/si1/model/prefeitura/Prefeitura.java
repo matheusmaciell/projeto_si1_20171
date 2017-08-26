@@ -4,6 +4,7 @@ import com.ufcg.si1.model.situacao.Situacao;
 
 public abstract class Prefeitura {
 	
+	
 	private double quoeficienteRuim;
 	private double quoeficienteRegular;
 	private SituacaoPrefeitura situacao;
