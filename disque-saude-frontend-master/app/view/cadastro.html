@@ -1,21 +1,24 @@
 <div class="container center">
+  <form name="complaintForm">
     <div class="jumbotron">
           <div>
             <b>Email:</b>
-            <input ng-model="userEmail" placeholder="myemail@domain.com">
+            <input ng-model="complaint.email" placeholder="myemail@domain.com">
           </div>
           <div>
             <b>Username:</b>
-            <input ng-model="userName" placeholder="My Name">
+            <input ng-model="complaint.nome" placeholder="My Name">
           </div>
           <div>
             <b>Password:</b>
-            <input ng-model="userPassword" placeholder="My Password">
+            <input ng-model="complaint.senha" placeholder="My Password">
           </div>
 
-
+        
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" ng-click="cadastrar(userName, userEmail, userPassword)">Cadastrar</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="cadastrar(complaint)">Cadastrar</button>
   </div>
     </div>
+  </form>  
 </div>
