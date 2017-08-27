@@ -2,17 +2,20 @@ app.controller("AdmCtrl", function($scope, $http){
   $scope.logado = false;
   $scope.actualAdm;
 
+  $scope.situacaoPrefeitura = function(){
+      $http.get("http://localhost:5000/SpringBootRestApi/queixa/situacaoPrefeitura").then(function(response) {
+          console.log(response)
+        
+    }, function error (error) {
+     // console.log(response)
+      console.log("error");
+    });
+
+
+
+  }
+
   $scope.cadastrar = function(complaint){
-    // var nomeCadastro = prompt("Name:", "Seu nome")
-    // var emailCadastro = prompt("Email:", "email@email.com");    utilizar isto, caso o modal nao funcione corretamente
-    // var senhaCadastro = prompt("Password:", "***********");
-    
-    //var admCadastrado = {"nome": nomeCadastro, "email": emailCadastro, "senha": senhaCadastro};
-
-   
-
-    //console.log(admCadastrado)
-    
     var promise = $http.post("http://localhost:5000/SpringBootRestApi/administrador/cadastrar", JSON.stringify(complaint)).then(function(response) {
        console.log(response)
       if (response.config.data === "") {

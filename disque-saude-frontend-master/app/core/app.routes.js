@@ -34,7 +34,8 @@ app.config(function ($routeProvider) {
     }).when("/adicionarUnidade", {
         templateUrl: "view/adicionarUnidade.html"
     }).when("/modificarSituacao", {
-        templateUrl: "view/modificarSituacao.html"
+        templateUrl: "view/modificarSituacao.html",
+        controller: "AdmCtrl"
     }).otherwise({
         redirectTo: '/'
     });

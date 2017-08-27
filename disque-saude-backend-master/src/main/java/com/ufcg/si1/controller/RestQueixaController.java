@@ -9,6 +9,7 @@ import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
 
+import org.apache.xalan.xsltc.compiler.sym;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,13 @@ public class RestQueixaController {
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
 
+	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.GET)
+	public ResponseEntity<Prefeitura> getPrefeitura() {
+		System.out.println("n ta funcionando");
+		return new ResponseEntity<Prefeitura>(this.situacaoAtualPrefeitura,HttpStatus.OK);
+		
+		
+	}
 	@RequestMapping(value = "/listarQueixa/", method = RequestMethod.GET)
 	public ResponseEntity<List<Queixa>> listAllUsers() {
 		List<Queixa> queixas = queixaService.findAllQueixas();
