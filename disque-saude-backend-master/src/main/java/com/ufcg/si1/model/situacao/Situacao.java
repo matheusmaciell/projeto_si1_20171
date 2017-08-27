@@ -5,6 +5,7 @@ public abstract class Situacao {
 	private String situacao;
 	private String cor;
 	
+
 	
 	public String getSituacao() {
 		return situacao;

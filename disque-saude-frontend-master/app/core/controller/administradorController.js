@@ -2,19 +2,20 @@ app.controller("AdmCtrl", function($scope, $http){
   $scope.logado = false;
   $scope.actualAdm;
 
-  $scope.situacaoPrefeitura = function(){
-      $http.get("http://localhost:5000/SpringBootRestApi/queixa/situacaoPrefeitura").then(function(response) {
-          console.log(response)
-
-    }, function error (error) {
-     // console.log(response)
-      console.log("error");
-    });
+  $scope.situacaoPrefeitura = function(estado){
+    console.log(estado);
 
 
 
+    $http.post("http://localhost:5000/SpringBootRestApi/queixa/situacaoPrefeitura",estado).then(function (response) {
+              alert("Prefeitura modificada para " + estado + " com sucesso")
+              
+              // console.log(response)
+          }, function (response) {
+                console.log(response)
+              
+          });
   }
-
   $scope.cadastrar = function(complaint){
     var promise = $http.post("http://localhost:5000/SpringBootRestApi/administrador/cadastrar", JSON.stringify(complaint)).then(function(response) {
        console.log(response)

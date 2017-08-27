@@ -6,6 +6,10 @@ public class Administrador{
 	private String nome;
 	private String email;
 
+	public Administrador(){
+		
+	}
+	
 	
 	public String getNome() {
 		return nome;

@@ -2,6 +2,8 @@ package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.model.prefeitura.Prefeitura;
+import com.ufcg.si1.model.prefeitura.PrefeituraCaos;
+import com.ufcg.si1.model.prefeitura.PrefeituraExtra;
 import com.ufcg.si1.model.prefeitura.PrefeituraNormal;
 import com.ufcg.si1.model.situacao.Situacao;
 import com.ufcg.si1.service.*;
@@ -32,12 +34,17 @@ public class RestQueixaController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.GET)
-	public ResponseEntity<Prefeitura> getPrefeitura() {
-		System.out.println("n ta funcionando");
-		return new ResponseEntity<Prefeitura>(this.situacaoAtualPrefeitura,HttpStatus.OK);
+	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.POST)
+	public void getPrefeitura(@RequestBody String situacao) {
+		if(situacao.equals("normal")){
+				this.situacaoAtualPrefeitura = new PrefeituraNormal();
+		}else if(situacao.equals("Extra")){
+			     this.situacaoAtualPrefeitura = new PrefeituraExtra();
+		}else {
+			    this.situacaoAtualPrefeitura = new PrefeituraCaos();
+		}
 		
-		
+		System.out.println(this.situacaoAtualPrefeitura);
 	}
 	 
 	/**
