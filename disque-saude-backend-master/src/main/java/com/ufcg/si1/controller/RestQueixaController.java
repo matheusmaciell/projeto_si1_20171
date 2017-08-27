@@ -28,6 +28,10 @@ public class RestQueixaController {
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
 
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.GET)
 	public ResponseEntity<Prefeitura> getPrefeitura() {
 		System.out.println("n ta funcionando");
@@ -35,6 +39,11 @@ public class RestQueixaController {
 		
 		
 	}
+	 
+	/**
+	 * Este metodo lista todas as queixas.
+	 * @return
+	 */
 	@RequestMapping(value = "/listarQueixa/", method = RequestMethod.GET)
 	public ResponseEntity<List<Queixa>> listAllUsers() {
 		List<Queixa> queixas = queixaService.findAllQueixas();
@@ -49,6 +58,13 @@ public class RestQueixaController {
 	// -------------------Abrir uma
 	// Queixa-------------------------------------------
 
+	/**
+	 * Este metodo, inicia uma nova queixa, salvando-a posteriormente em seu devido banco de dados.
+	 * @param queixa
+	 * @param ucBuilder
+	 * @return
+	 * @throws QueixaVaziaException
+	 */
 	@RequestMapping(value = "/abrirQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) throws QueixaVaziaException {
 		try {
@@ -60,6 +76,12 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
 
+	
+	/**
+	 * Este metodo, consulta uma queixa, atraves de seu id, verificando seu status e sua existencia.
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/consultarQueixaID/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixaID(@PathVariable("id") long id) {
 		Queixa queixaEncontradaId = queixaService.findById(id);
@@ -69,6 +91,11 @@ public class RestQueixaController {
 		return new ResponseEntity<Queixa>(queixaEncontradaId, HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo, consulta uma queixa, atraves de seu nome, verificando seu status e sua existencia.
+	 * @param nome
+	 * @return
+	 */
 	@RequestMapping(value = "/consultarQueixaNome/{nome}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarQueixaNome(@PathVariable("nome") String nome) {
 

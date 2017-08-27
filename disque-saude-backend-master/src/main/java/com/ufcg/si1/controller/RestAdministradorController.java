@@ -17,7 +17,11 @@ import com.ufcg.si1.service.AdministradorServiceImpl;
 public class RestAdministradorController {
 	
 	AdministradorServiceImpl administradorService = new AdministradorServiceImpl();
-	
+	/**
+	 * Este metodo guarda no banco de dados um usuario do tipo administrador.
+	 * @param adm
+	 * @return
+	 */
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<Administrador> cadastrar(@RequestBody Administrador adm) {
 		//System.out.println(adm.getEmail());
@@ -28,6 +32,12 @@ public class RestAdministradorController {
 		}
 		return new ResponseEntity<>(admCadastrado, HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Este metodo permite que o usuario de conecte com o sistema, dando-lhe acesso ás suas funcionalidades.
+	 * @param email
+	 * @return
+	 */
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Administrador> logar(@RequestBody String email) {

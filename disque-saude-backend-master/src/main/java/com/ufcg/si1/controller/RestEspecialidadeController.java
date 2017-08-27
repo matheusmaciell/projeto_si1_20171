@@ -21,6 +21,11 @@ public class RestEspecialidadeController {
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 	 EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
 	 
+	 /**
+	  * Metodo que busca uma especialidade medica, consultando uma unidade de saude através de seu código.
+	  * @param codigoUnidadeSaude
+	  * @return
+	  */
 	@RequestMapping(value = "/porUnidadeSaude/", method = RequestMethod.GET)
     public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
 
@@ -39,6 +44,12 @@ public class RestEspecialidadeController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+	/**
+	 * Metodo que inclui uma nova especialidade medica, ao sistema.
+	 * @param esp
+	 * @param ucBuilder
+	 * @return
+	 */
     @RequestMapping(value = "/incluirEspecialidade/", method = RequestMethod.POST)
     public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp, UriComponentsBuilder ucBuilder) {
         try {
@@ -54,6 +65,12 @@ public class RestEspecialidadeController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
+    /**
+     * Metodo que consulta uma especialidade medica atraves de seu id, verificando se ela ja é
+     * cadastrada ou não.
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/consultaEspecialidadeID/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) {
 
