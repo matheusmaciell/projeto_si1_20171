@@ -57,13 +57,14 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
 });
 
 app.controller("listComplaints", function($scope, $http) {
-    $scope.complaints;
+    $scope.complaints = [];
 
     $scope.getCompalints = function() {
-        console.log("clara");
         $http.get("http://localhost:5000/SpringBootRestApi/queixa/listarQueixas/").then(function successCallback(response) {
+            for (var i = 0; i < response.length; i++) {
+                complaints[i] = response.data;
+            }
             console.log(response.data);
-            $scope.complaints = response.data;
         }, function errorCallback(error) {
             $scope.complaints = null;
             console.log(error);

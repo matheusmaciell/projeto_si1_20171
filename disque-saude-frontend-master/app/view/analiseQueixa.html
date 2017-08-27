@@ -1,7 +1,9 @@
 <div class="container center-block">
-	<!--div ng-repeat="complaint in getCompalints()"-->
-		<div class="jumbotron col-md-6 col-md-offset-2"></div> <!--  -->
+	<!-- div ng-repeat="complaint in getCompalints()" -->
+		<div class="jumbotron col-md-6 col-md-offset-2">
+			<h1>{{ complaint.id }}</h1>
+		</div>
 	</div>
 
-	<button ng-click="searchComplaint(1)">queixas</button>
+	<button ng-click="getCompalints()">queixas</button>
 </div>

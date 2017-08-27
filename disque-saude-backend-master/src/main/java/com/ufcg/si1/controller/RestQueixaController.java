@@ -44,7 +44,7 @@ public class RestQueixaController {
 	 * Este metodo lista todas as queixas.
 	 * @return
 	 */
-	@RequestMapping(value = "/listarQueixa/", method = RequestMethod.GET)
+	@RequestMapping(value = "/listarQueixas/", method = RequestMethod.GET)
 	public ResponseEntity<List<Queixa>> listAllUsers() {
 		List<Queixa> queixas = queixaService.findAllQueixas();
 
