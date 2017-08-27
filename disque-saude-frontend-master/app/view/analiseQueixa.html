@@ -1,1 +1,26 @@
 <h1>analise das queixas</h1>
+<canvas id="doughnut-chart" width="800" height="450"></canvas>
+
+<script type="text/javascript">
+
+  var eficiencia = new Chart(document.getElementById("doughnut-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Abertas", "Fechadas"],
+        datasets: [
+          {
+            label: "eficiencia",
+            backgroundColor: ["#3e95cd","#c45850"],
+            data: [2478 ,433] // aqui tem que por os numeros
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Consulta de Eficiência de queixas.'
+        }
+      }
+    });
+
+</script>

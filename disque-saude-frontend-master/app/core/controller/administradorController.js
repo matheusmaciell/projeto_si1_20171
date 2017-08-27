@@ -2,6 +2,7 @@ app.controller("AdmCtrl", function($scope, $http){
   $scope.logado = false;
   $scope.actualAdm;
 
+
   $scope.situacaoPrefeitura = function(estado){
     console.log(estado);
 
@@ -9,11 +10,11 @@ app.controller("AdmCtrl", function($scope, $http){
 
     $http.post("http://localhost:5000/SpringBootRestApi/queixa/situacaoPrefeitura",estado).then(function (response) {
               alert("Prefeitura modificada para " + estado + " com sucesso")
-              
+
               // console.log(response)
           }, function (response) {
                 console.log(response)
-              
+
           });
   }
   $scope.cadastrar = function(complaint){
