@@ -27,7 +27,7 @@ public class RestUnidadeController {
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
-    public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody PostoSaude us, UriComponentsBuilder ucBuilder) {
 
         try {
             unidadeSaudeService.insere(us);

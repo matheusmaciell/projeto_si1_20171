@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
-})
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+//@JsonSubTypes({
+//        @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
+//})
 public abstract class UnidadeSaude {
     private int codigo;
 

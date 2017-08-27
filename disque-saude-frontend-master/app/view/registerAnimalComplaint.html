@@ -6,13 +6,16 @@
                     <legend>Queixa sobre Animal Perdido</legend>
                     <!--Description field-->
                     <div class="form-group row">
-                        <label for="inputDescription" class="col-sm-2 col-form-label">Comentários:</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao" ng-required="true"></textarea>
+                        <div>
+                          <b>Comentários:</b>
+                          <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao" ng-required="true"></textarea>
+
                         </div>
-                        <label for="inputDescription" class="col-sm-2 col-form-label">Tipo de Animal:</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.tipoAnimal" ng-required="true"></textarea>
+                        <br />
+                        <div>
+                          <b>Tipo de Animal:</b>
+                          <input class="form-control" name="description" id="inputDescription" ng-model="complaint.tipoAnimal" ng-required="true"></input>
+
                         </div>
                     </div>
                 </fieldset>
