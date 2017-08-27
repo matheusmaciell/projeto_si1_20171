@@ -11,6 +11,9 @@ app.config(function ($routeProvider) {
     }).when("/complaint/register", {
         templateUrl: "view/registerComplaint.html",
         controller : "registerComplaintCtrl",
+    }).when("/complaintAnimal/register", {
+        templateUrl: "view/registerAnimalComplaint.html",
+        controller : "registerComplaintCtrl",
     }).when("/searchcomplaint", {
         templateUrl : "view/search_complaint.html",
         controller: "searchComplaintCtrl"

@@ -1,24 +1,24 @@
-<div class="container center">
-  <form name="complaintForm">
-    <div class="jumbotron">
+<div class="container center-block">
+    <div class="jumbotron col-md-6 col-md-offset-4" id="register">
           <div>
             <b>Email:</b>
-            <input ng-model="complaint.email" placeholder="myemail@domain.com">
+            <input ng-model="complaint.email" type="text" class="form-control" placeholder="email@domain.com">
           </div>
+          <br />
           <div>
             <b>Username:</b>
-            <input ng-model="complaint.nome" placeholder="My Name">
+            <input ng-model="complaint.nome" type="text" class="form-control" placeholder="My Name">
           </div>
+          <br />
           <div>
             <b>Password:</b>
-            <input ng-model="complaint.senha" placeholder="My Password">
+            <input type="password" ng-model="complaint.senha" class="form-control" placeholder="Password"/>
           </div>
 
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-    <button type="button" class="btn btn-primary" ng-click="cadastrar(complaint)">Cadastrar</button>
+    <button type="button" class="btn btn-primary btn-block" ng-click="cadastrar(complaint)">Cadastrar</button>
+    <h4 class="text-center"><a href="#!/">Fechar</a></h4>
   </div>
     </div>
-  </form>
 </div>
