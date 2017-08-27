@@ -2,13 +2,18 @@ package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.QueixaAnimal;
+import com.ufcg.si1.repository.QueixaRepository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
+	
+	@Autowired
+	QueixaRepository queixaRep;
 
 	@Override
 	public List<Queixa> findAllQueixas() {
