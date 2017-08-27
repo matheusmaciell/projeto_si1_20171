@@ -35,7 +35,8 @@ app.config(function ($routeProvider) {
     }).when("/analiseQueixa", {
         templateUrl: "view/analiseQueixa.html"
     }).when("/adicionarUnidade", {
-        templateUrl: "view/adicionarUnidade.html"
+        templateUrl: "view/adicionarUnidade.html",
+        controller: "addHealthUnitCtrl"
     }).when("/modificarSituacao", {
         templateUrl: "view/modificarSituacao.html",
         controller: "AdmCtrl"

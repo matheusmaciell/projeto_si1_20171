@@ -28,3 +28,17 @@ app.controller("searchHealthUnitCtrl", function ($scope, $http) {
             });
     }
 });
+
+app.controller("addHealthUnitCtrl", function ($scope, $http, toastr, $location) {
+
+    $scope.addHU = function (healthunit) {
+        $http.post("http://localhost:5000/SpringBootRestApi/unidadeSaude/incluirUnidade/" + JSON.stringify(healthunit))
+            .then(function success(response) {
+                toastr.success("Unidade de Saúde adicionada com sucesso!");
+                console.log(response.data);
+            }, function failed(error) {
+                console.log("Erro ao adicionar unidades");
+                console.log(error.data.errorMessage);
+            });
+    }
+});

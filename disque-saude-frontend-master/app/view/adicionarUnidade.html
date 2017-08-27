@@ -1,1 +1,24 @@
-<h1>adionarUnidade</h1>
+<div class="container center-block">
+    <div>
+         <form name="complaintForm">
+            <div class="col-md-5 col-md-offset-3">
+                <fieldset>
+                    <legend>Adicionar Unidade de Saúde</legend>
+                    <!--Description field-->
+                    <div class="form-group row">
+                        <b>Bairro</b>
+                        <input type="text" class="form-control" name="bairro" id="inputName" ng-model="healthunit.descricao" ng-required="true">
+
+                    </div>
+                    <!--Name field-->
+                    <div class="form-group row">
+                        <b>Número de Funcionários:</b>
+                        <input type="text" class="form-control" name="funcionarios" id="inputName" ng-model="healthunit.atendentes" ng-required="true">
+
+                    </div>
+                </fieldset>
+                <button class="btn btn-primary btn-block" ng-click="addHU(healthunit)" ng-disabled="complaintForm.$invalid">Adicionar Unidade</button>
+            </div>
+        </form>
+    </div>
+</div>

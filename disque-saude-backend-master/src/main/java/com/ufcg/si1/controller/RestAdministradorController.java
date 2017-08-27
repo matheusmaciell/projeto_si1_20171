@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Administrador;
+import com.ufcg.si1.model.UnidadeSaude;
 import com.ufcg.si1.service.AdministradorServiceImpl;
 
 @RestController
@@ -16,7 +17,7 @@ import com.ufcg.si1.service.AdministradorServiceImpl;
 @CrossOrigin
 public class RestAdministradorController {
 	
-	AdministradorServiceImpl administradorService = new AdministradorServiceImpl();
+	private AdministradorServiceImpl administradorService = new AdministradorServiceImpl();
 	/**
 	 * Este metodo guarda no banco de dados um usuario do tipo administrador.
 	 * @param adm
@@ -48,5 +49,6 @@ public class RestAdministradorController {
 		}
 		return new ResponseEntity<>(adm, HttpStatus.OK);
 	}
+	
 
 }
