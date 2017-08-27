@@ -6,6 +6,8 @@ import com.ufcg.si1.repository.UnidadeSaudeRepository;
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 @Service("unidadeSaudeService")
 public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
+	@Autowired
 	private UnidadeSaudeRepository unidadeRepository;
 	
 	@Override
