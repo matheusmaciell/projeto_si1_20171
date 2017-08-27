@@ -5,7 +5,6 @@ import com.ufcg.si1.model.QueixaAnimal;
 import com.ufcg.si1.repository.QueixaRepository;
 
 import exceptions.ObjetoInvalidoException;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,15 +49,20 @@ public class QueixaServiceImpl implements QueixaService {
 
 	@Override
 	public Queixa findByName(String name) {
+		List<Queixa> bancoQueixas = findAllQueixas();
+		for (Queixa queixa : bancoQueixas) {
+			if(queixa.getDescricao().equals(name)){
+				return queixa;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public void fecharQueixa(Queixa queixa) throws ObjetoInvalidoException {
+
 		this.queixaRep.findOne(queixa.getId()).fechar(queixa.getComentario());
-		
+	
 	}
-
-
 
 }
