@@ -5,7 +5,7 @@ app.controller("AdmCtrl", function($scope, $http){
   $scope.situacaoPrefeitura = function(){
       $http.get("http://localhost:5000/SpringBootRestApi/queixa/situacaoPrefeitura").then(function(response) {
           console.log(response)
-        
+
     }, function error (error) {
      // console.log(response)
       console.log("error");
@@ -24,22 +24,23 @@ app.controller("AdmCtrl", function($scope, $http){
         $scope.actualAdm = response.config.data;
         $scope.logado = true;
         alert("Email cadastrado com sucesso!")
+        window.location.assign("http://localhost:8000/#!/home");
       }
     }, function error (error) {
-       
+
         //console.log(error);
     });
   }
 
   $scope.login = function (userEmail, userPassword) {
-  
+
     var promise = $http.post("http://localhost:5000/SpringBootRestApi/administrador/login", userEmail).then(function(response) {
       if(response.data.senha === userPassword){
         alert("Logado")
         $scope.actualAdm = response.data;
       $scope.logado = true;
       window.location.assign("http://localhost:8000/#!/adminArea");
-      }  
+      }
     }, function error (error) {
       alert("Login incorreto!");
       console.log(error);
