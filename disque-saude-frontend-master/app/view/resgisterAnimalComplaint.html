@@ -3,10 +3,14 @@
          <form name="complaintForm">
             <div class="col-md-5 col-md-offset-3">
                 <fieldset>
-                    <legend>Queixa Alimentar</legend>
+                    <legend>Queixa sobre Animal Perdido</legend>
                     <!--Description field-->
                     <div class="form-group row">
-                        <label for="inputDescription" class="col-sm-2 col-form-label">Descrição:</label>
+                        <label for="inputDescription" class="col-sm-2 col-form-label">Comentários:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao" ng-required="true"></textarea>
+                        </div>
+                        <label for="inputDescription" class="col-sm-2 col-form-label">Tipo de Animal:</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao" ng-required="true"></textarea>
                         </div>
@@ -28,7 +32,7 @@
                             <input type="email" class="form-control" name="email" id="inputEmail" ng-model="complaint.solicitante.email" ng-required="true">
                         </div>
                     </div>
-                    <legend>Endereço do estabelecimento</legend>
+                    <legend>Local onde animal foi encontrado</legend>
                     <!--Street field-->
                     <div class="form-group row">
                         <label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
