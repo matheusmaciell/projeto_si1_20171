@@ -29,6 +29,12 @@ app.config(function ($routeProvider) {
     }).when("/adminArea", {
         templateUrl: "view/adminArea.html",
         controller: "AdmCtrl"
+    }).when("/analiseQueixa", {
+        templateUrl: "view/analiseQueixa.html"
+    }).when("/adicionarUnidade", {
+        templateUrl: "view/adicionarUnidade.html"
+    }).when("/modificarSituacao", {
+        templateUrl: "view/modificarSituacao.html"
     }).otherwise({
         redirectTo: '/'
     });
