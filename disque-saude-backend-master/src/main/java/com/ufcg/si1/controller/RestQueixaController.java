@@ -91,6 +91,38 @@ public class RestQueixaController {
 		}
 		return new ResponseEntity<List<Queixa>>(queixas, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
+	public ResponseEntity<?> queixasAbertas() {
+		List<Queixa> queixas = queixaService.findAllQueixas();
+		
+		int contAbertas = 0;
+		for (int i = 0; i < queixas.size(); i++) {
+			if(queixas.get(i).getEstado().equals(EstadoQueixa.ABERTA)){
+				contAbertas++;
+			}
+		}
+		if (queixas.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(contAbertas, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
+	public ResponseEntity<?> queixasFechadas() {
+		List<Queixa> queixas = queixaService.findAllQueixas();
+		
+		int contFechadas = 0;
+		for (int i = 0; i < queixas.size(); i++) {
+			if(queixas.get(i).getEstado().equals(EstadoQueixa.FECHADA)){
+				contFechadas++;
+			}
+		}
+		if (queixas.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(contFechadas, HttpStatus.OK);
+	}
 
 	// -------------------Abrir uma
 	// Queixa-------------------------------------------
