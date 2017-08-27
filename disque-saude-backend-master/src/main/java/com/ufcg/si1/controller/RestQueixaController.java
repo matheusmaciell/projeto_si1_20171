@@ -178,7 +178,12 @@ public class RestQueixaController {
 	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
 
-		queixaService.fecharQueixa(queixaAFechar);
+		try {
+			queixaService.fecharQueixa(queixaAFechar);
+		} catch (ObjetoInvalidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
