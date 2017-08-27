@@ -3,7 +3,10 @@ package com.ufcg.si1.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import br.edu.ufcg.Hospital;
+
 
 public class HospitalAdapter extends UnidadeSaude {
 	
@@ -13,17 +16,14 @@ public class HospitalAdapter extends UnidadeSaude {
 		this.hospital = new Hospital(descricao, medicos, num);
 	}
 	
-	@Override
 	public int pegaCodigo() {
 		return hospital.getCodigo();
 	}
 	
-	@Override
 	public void mudaCodigo(int codigo) {
 		hospital.setCodigo(codigo);
 	}
 	
-	@Override
 	public String pegaDescricao() {
 		return hospital.getDescricao();		
 	}
@@ -32,12 +32,10 @@ public class HospitalAdapter extends UnidadeSaude {
 		return hospital.getContador();
 	}
 
-	@Override
 	public int getNumeroFuncionarios() {
 		return hospital.getNumeroMedicos();
 	}
 
-	@Override
 	public float atendimentosDiarios() {
 		return hospital.getNumeroPacientesDia();
 	}

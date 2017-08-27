@@ -2,16 +2,16 @@ package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.model.prefeitura.Prefeitura;
-import com.ufcg.si1.model.prefeitura.PrefeituraCaos;
-import com.ufcg.si1.model.prefeitura.PrefeituraExtra;
 import com.ufcg.si1.model.prefeitura.PrefeituraNormal;
-import com.ufcg.si1.model.situacao.Situacao;
+
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.EstadoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
 
-import org.apache.xalan.xsltc.compiler.sym;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,27 +24,57 @@ import java.util.List;
 @CrossOrigin
 public class RestQueixaController {
 
-	QueixaService queixaService = new QueixaServiceImpl();
+	@Autowired
+	private QueixaService queixaService = new QueixaServiceImpl();
+	
 	Prefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
 
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
+	
+	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
+	 	public ResponseEntity<?> queixasAbertas() {
+	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		
+	 		int contAbertas = 0;
+	 		for (int i = 0; i < queixas.size(); i++) {
+	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.ABERTA)){
+	 				contAbertas++;
+	 			}
+	 		}
+	 		if (queixas.isEmpty()) {
+	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	 		}
+	 		return new ResponseEntity<>(contAbertas, HttpStatus.OK);
+	 	}
+	 	
+	 	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
+	 	public ResponseEntity<?> queixasFechadas() {
+	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		
+	 		int contFechadas = 0;
+	 		for (int i = 0; i < queixas.size(); i++) {
+	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.FECHADA)){
+	 				contFechadas++;
+	 			}
+	 		}
+	 		if (queixas.isEmpty()) {
+	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	 		}
+	 		return new ResponseEntity<>(contFechadas, HttpStatus.OK);
+	 
+	 }
 
 	/**
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.POST)
-	public void getPrefeitura(@RequestBody String situacao) {
-		if(situacao.equals("normal")){
-				this.situacaoAtualPrefeitura = new PrefeituraNormal();
-		}else if(situacao.equals("Extra")){
-			     this.situacaoAtualPrefeitura = new PrefeituraExtra();
-		}else {
-			    this.situacaoAtualPrefeitura = new PrefeituraCaos();
-		}
+	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.GET)
+	public ResponseEntity<Prefeitura> getPrefeitura() {
+		System.out.println("n ta funcionando");
+		return new ResponseEntity<Prefeitura>(this.situacaoAtualPrefeitura,HttpStatus.OK);
 		
-		System.out.println(this.situacaoAtualPrefeitura);
+		
 	}
 	 
 	/**
@@ -115,10 +145,10 @@ public class RestQueixaController {
 	
 	@RequestMapping(value = "/situacaoGeralQueixas/", method = RequestMethod.GET)
     public ResponseEntity<?> getSituacaoGeralQueixas() {
+		return null;
+        //Situacao situacaoAtual = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
 
-        Situacao situacaoAtual = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
-
-        return new ResponseEntity<>(situacaoAtual, HttpStatus.OK);
+        //return new ResponseEntity<>(situacaoAtual, HttpStatus.OK);
     }
 
 	@RequestMapping(value = "/updateQueixaID/{id}", method = RequestMethod.PUT)
@@ -129,7 +159,7 @@ public class RestQueixaController {
 					HttpStatus.NOT_FOUND);
 		}
 		
-		queixaService.updateQueixa(id, queixa);
+		queixaService.updateQueixa(queixa);
 		return new ResponseEntity<Queixa>(this.queixaService.findById(id), HttpStatus.OK);
 	}
 
@@ -148,11 +178,7 @@ public class RestQueixaController {
 	@RequestMapping(value = "/fecharQueixa/", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
 		
-		try {
-			queixaService.fecharQueixa(queixaAFechar);
-		} catch (ObjetoInvalidoException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+		queixaService.fecharQueixa(queixaAFechar);
 		
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}

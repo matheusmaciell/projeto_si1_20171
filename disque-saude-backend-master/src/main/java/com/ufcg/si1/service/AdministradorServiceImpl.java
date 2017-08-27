@@ -1,43 +1,52 @@
 package com.ufcg.si1.service;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ufcg.si1.model.Administrador;
 import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.repository.AdministradorRepository;
+
+import exceptions.ObjetoInexistenteException;
+import exceptions.ObjetoInvalidoException;
 
 @Service("AdministradorService")
-public class AdministradorServiceImpl {
+public class AdministradorServiceImpl implements AdministradorService {
 	
-	private Map<String, Administrador> administradores;
-	private Set<UnidadeSaude> unidadesSaude;
-	
-	public AdministradorServiceImpl() {
-		this.administradores = new HashMap<>();
-		this.unidadesSaude = new HashSet<>();
-	}
-	
+	@Autowired
+	AdministradorRepository adminRep;
+
+	@Override
 	public Administrador cadastrar(Administrador adm) {
-		if (administradores.containsKey(adm.getEmail())) {
-			return null; 
+		return this.adminRep.save(adm);
+	}
+
+	@Override
+	public Administrador logar(Administrador administrador) throws ObjetoInvalidoException, ObjetoInexistenteException {
+		return this.logar(administrador.getEmail(), administrador.getSenha());
+	}
+
+	private Administrador logar(String login, String senha) throws ObjetoInvalidoException, ObjetoInexistenteException {
+		for (Administrador administrador : this.adminRep.findAll()) {
+			if (administrador.getEmail().equals(login)) {
+				if (administrador.getSenha().equals(senha)) {
+					return administrador;
+				} else {
+					throw new ObjetoInvalidoException("Senha incorreta");
+				}
+			}
 		}
-		return administradores.put(adm.getEmail(), adm);
+		throw new ObjetoInexistenteException("Administrador nao cadastrado");
 	}
-	
-	public Administrador logar(String email) {
-		return administradores.get(email);
-	}
-
+	@Override
 	public UnidadeSaude adicionaUnidade(UnidadeSaude newUnidade) {
-		this.unidadesSaude.add(newUnidade);
-		return newUnidade;
-		
+		return null;
 	}
 	
 	
-
+	
+	
 }

@@ -1,6 +1,8 @@
 package com.ufcg.si1.model;
 
+import javax.persistence.Entity;
 
+@Entity
 public class PostoSaude extends UnidadeSaude{
     private int atendentes;
 
@@ -37,13 +39,5 @@ public class PostoSaude extends UnidadeSaude{
         this.taxaDiariaAtendimentos = taxaDiariaAtendimentos;
     }
 
-	@Override
-	public int getNumeroFuncionarios() {
-		return this.getAtendentes();
-	}
 
-	@Override
-	public float atendimentosDiarios() {
-		return this.getTaxaDiariaAtendimentos();
-	}
 }
