@@ -25,7 +25,7 @@ public interface QueixaService {
 
 	void deleteQueixaById(long id);
 	
-	public void fecharQueixa(Queixa queixa);
+	public void fecharQueixa(Queixa queixa) throws ObjetoInvalidoException;
 
 	
 }
