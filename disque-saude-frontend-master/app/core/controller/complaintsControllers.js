@@ -57,7 +57,7 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
 });
 
 
-app.controller("getOpenComplaints", function ($scope, $http) {
+app.controller("getOpenComplaintsCtrl", function ($scope, $http) {
     $scope.openComplaints = 0;
 
     $scope.openComplaints = function () {
@@ -71,7 +71,7 @@ app.controller("getOpenComplaints", function ($scope, $http) {
 });
 
 
-app.controller("getClosedComplaints", function ($scope, $http) {
+app.controller("getClosedComplaintsCtrl", function ($scope, $http) {
     $scope.closedComplaints = 0;
 
     $scope.closedComplaints = function () {
