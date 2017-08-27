@@ -33,7 +33,8 @@ app.config(function ($routeProvider) {
         templateUrl: "view/adminArea.html",
         controller: "AdmCtrl"
     }).when("/analiseQueixa", {
-        templateUrl: "view/analiseQueixa.html"
+        templateUrl: "view/analiseQueixa.html",
+        controller: "listComplaints"
     }).when("/adicionarUnidade", {
         templateUrl: "view/adicionarUnidade.html"
     }).when("/modificarSituacao", {

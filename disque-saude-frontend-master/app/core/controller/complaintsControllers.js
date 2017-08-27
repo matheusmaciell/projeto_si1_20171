@@ -55,3 +55,18 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
         });
     }
 });
+
+app.controller("listComplaints", function($scope, $http) {
+    $scope.complaints;
+
+    $scope.getCompalints = function() {
+        console.log("clara");
+        $http.get("http://localhost:5000/SpringBootRestApi/queixa/listarQueixas/").then(function successCallback(response) {
+            console.log(response.data);
+            $scope.complaints = response.data;
+        }, function errorCallback(error) {
+            $scope.complaints = null;
+            console.log(error);
+        });
+    }
+});
