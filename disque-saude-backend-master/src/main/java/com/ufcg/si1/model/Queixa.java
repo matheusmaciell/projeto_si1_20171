@@ -3,6 +3,8 @@ package com.ufcg.si1.model;
 import exceptions.ObjetoInvalidoException;
 
 import com.ufcg.si1.state.EstadoQueixa;
+import com.ufcg.si1.state.IQueixaState;
+import com.ufcg.si1.state.QueixaAberta;
 
 public class Queixa {
 
@@ -15,6 +17,8 @@ public class Queixa {
 	private Endereco estabelecimento;
 	
 	private EstadoQueixa estado;
+	
+	private IQueixaState queixaState;
 	
 	private String comentario = ""; // usado na atualizacao da queixa
 
@@ -29,6 +33,7 @@ public class Queixa {
 		this.descricao = descricao;
 		this.estado = estado;
 		this.comentario = comentario;
+		this.queixaState = new QueixaAberta();
 		this.solicitante = new Pessoa(nome, email);
 		this.estabelecimento = new Endereco(rua, uf, cidade);
 	}
@@ -69,6 +74,14 @@ public class Queixa {
 			this.comentario = coment;
 		} else
 			throw new ObjetoInvalidoException("Status Inválido");
+	}
+	
+	public void alteraState(IQueixaState state) {
+		this.queixaState = state;
+	}
+	
+	public IQueixaState verificaState() {
+		return this.queixaState;
 	}
 
 	public String getComentario() {

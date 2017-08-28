@@ -22,51 +22,43 @@ import java.util.List;
 public class RestQueixaController {
 
 	QueixaService queixaService = new QueixaServiceImpl();
-	Prefeitura situacaoAtualPrefeitura = new PrefeituraNormal();
+	AdministradorService admService = new AdministradorServiceImpl();
 
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
 
 	
 	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
-	 	public ResponseEntity<?> queixasAbertas() {
-		
-	 		List<Queixa> queixas = queixaService.findAllQueixas();
-	 		int contAbertas = queixaService.getAbertas();
-	 		
-	 		if (queixas.isEmpty()) {
-	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	 		}
-	 		return new ResponseEntity<>(contAbertas, HttpStatus.OK);
-	 	}
-	 	
-	 	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
-	 	public ResponseEntity<?> queixasFechadas() {
-	 		
-	 		List<Queixa> queixas = queixaService.findAllQueixas();
-	 		int contFechadas = queixaService.getFechadas();
-	 		
-	 		if (queixas.isEmpty()) {
-	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	 		}
-	 		return new ResponseEntity<>(contFechadas, HttpStatus.OK);
-	 	}
+ 	public ResponseEntity<?> queixasAbertas() {
+	
+ 		List<Queixa> queixas = queixaService.findAllQueixas();
+ 		int contAbertas = queixaService.getAbertas();
+ 		
+ 		if (queixas.isEmpty()) {
+ 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+ 		}
+ 		return new ResponseEntity<>(contAbertas, HttpStatus.OK);
+ 	}
+ 	
+ 	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
+ 	public ResponseEntity<?> queixasFechadas() {
+ 		
+ 		List<Queixa> queixas = queixaService.findAllQueixas();
+ 		int contFechadas = queixaService.getFechadas();
+ 		
+ 		if (queixas.isEmpty()) {
+ 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+ 		}
+ 		return new ResponseEntity<>(contFechadas, HttpStatus.OK);
+ 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/situacaoPrefeitura", method = RequestMethod.POST)
- 	public void getPrefeitura(@RequestBody String situacao) {
- 		if(situacao.equals("normal")){
- 				this.situacaoAtualPrefeitura = new PrefeituraNormal();
- 		}else if(situacao.equals("Extra")){
- 			     this.situacaoAtualPrefeitura = new PrefeituraExtra();
- 		}else {
- 			    this.situacaoAtualPrefeitura = new PrefeituraCaos();
- 		}
- 		
- 		System.out.println(this.situacaoAtualPrefeitura);
+ 	public void setPrefeitura(@RequestBody Prefeitura newPrefeitura) {
+ 		this.admService.alteraPrefeitura(newPrefeitura);
   	}
 	 
 	/**
@@ -138,7 +130,7 @@ public class RestQueixaController {
 	@RequestMapping(value = "/situacaoGeralQueixas/", method = RequestMethod.GET)
     public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-        Situacao situacaoAtual = this.situacaoAtualPrefeitura.getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
+        Situacao situacaoAtual = this.admService.getPrefeitura().getSituacaoGeral(queixaService.numeroQueixasAbertas(), queixaService.size());
 
         return new ResponseEntity<>(situacaoAtual, HttpStatus.OK);
     }
