@@ -25,7 +25,7 @@ public class RestUnidadeController {
 	 QueixaService queixaService = new QueixaServiceImpl();
 	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 	 
-	//how to save a subclass object?
+	
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
     public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
 
@@ -36,9 +36,7 @@ public class RestUnidadeController {
         } catch (ObjetoJaExistenteException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(ucBuilder.path("/us/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
+
         return new ResponseEntity<UnidadeSaude>(us, HttpStatus.CREATED);
     }    
 

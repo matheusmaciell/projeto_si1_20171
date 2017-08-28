@@ -20,7 +20,7 @@ public class Queixa {
 	
 	private IQueixaState queixaState;
 	
-	private String comentario = ""; // usado na atualizacao da queixa
+	private String comentario = ""; 
 
 	public Queixa(){
 		id = 0;

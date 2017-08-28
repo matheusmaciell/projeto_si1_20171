@@ -24,8 +24,7 @@ public class RestQueixaController {
 	QueixaService queixaService = new QueixaServiceImpl();
 	AdministradorService admService = new AdministradorServiceImpl();
 
-	// -------------------Retrieve All
-	// Complaints---------------------------------------------
+
 
 	
 	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
@@ -71,13 +70,12 @@ public class RestQueixaController {
 
 		if (queixas.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			// You many decide to return HttpStatus.NOT_FOUND
+			
 		}
 		return new ResponseEntity<List<Queixa>>(queixas, HttpStatus.OK);
 	}
 
-	// -------------------Abrir uma
-	// Queixa-------------------------------------------
+
 
 	/**
 	 * Este metodo, inicia uma nova queixa, salvando-a posteriormente em seu devido banco de dados.
