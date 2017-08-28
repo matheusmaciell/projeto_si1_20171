@@ -29,6 +29,8 @@ public interface QueixaService {
 
 	void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException;
 
+	int size();
+
 
 //	boolean isUserExist(Queixa user);
 	

@@ -18,9 +18,14 @@ public class QueixaServiceImpl implements QueixaService {
 
     private  final AtomicLong counter = new AtomicLong();
     private List<Queixa> queixas = new ArrayList<Queixa>();
+    
 
     public List<Queixa> findAllQueixas() {
         return queixas;
+    }
+    
+    public int size() {
+    	return queixas.size();
     }
 
     public void saveQueixa(Queixa queixa){
