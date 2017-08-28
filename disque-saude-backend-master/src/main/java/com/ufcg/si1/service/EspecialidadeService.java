@@ -17,8 +17,6 @@ public interface EspecialidadeService {
 
     int size();
 
-    Especialidade getElemento(int posicao);
-
     void insere(Especialidade esp)throws Rep,
             ObjetoJaExistenteException;
 

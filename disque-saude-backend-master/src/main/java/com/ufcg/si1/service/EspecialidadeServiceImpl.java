@@ -26,7 +26,8 @@ public class EspecialidadeServiceImpl implements EspecialidadeService {
             ObjetoInexistenteException {
         
         for (Especialidade especialidade : especialidades) {
-        	if(especialidade.getCodigo() == codigo) return especialidade;
+        	if(especialidade.getCodigo() == codigo) 
+        		return especialidade;
 			
 		}
 
@@ -45,39 +46,24 @@ public class EspecialidadeServiceImpl implements EspecialidadeService {
     }
 
     @Override
-    public Especialidade getElemento(int posicao) {
-        if (posicao < especialidades.size())
-            return this.especialidades.get(posicao);
-        else
-            return null;
-    }
-
-    @Override
     public void insere(Especialidade esp) throws Rep,
             ObjetoJaExistenteException {
-
         esp.setCodigo(++geraCodigo);
-
         if (this.existe(esp.getCodigo())) {
             throw new ObjetoJaExistenteException("Objeto jah existe no array");
         }
-
         this.especialidades.add(esp);
     }
 
     @Override
     public boolean existe(int codigo) {
-
-        boolean existe = false;
-        
         for (Especialidade especialidade : especialidades) {
 			if (especialidade.getCodigo() == codigo) {
-				existe = true;
-				break;
+				return true;
 			}
 		}
 
-        return existe;
+        return false;
     }
 
     public Especialidade findById(long id) {
