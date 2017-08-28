@@ -60,11 +60,11 @@ app.controller("listComplaints", function($scope, $http) {
     $scope.complaints;
 
     $scope.getComplaints = function() {
-        $http.get("http://localhost:5000/SpringBootRestApi/queixa/listarQueixas/").then(function successCallback(response) {
+        $http.get("http://localhost:5000/SpringBootRestApi/queixa/listarQueixa/").then(function successCallback(response) {
             console.log(response.data);
             $scope.complaints = response.data;
         }, function errorCallback(error) {
-            $scope.complaints = null;
+            $scope.complaints = 0;
             console.log(error);
         });
     }
