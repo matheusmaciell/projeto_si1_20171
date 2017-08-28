@@ -40,9 +40,4 @@ public class HospitalAdapter extends UnidadeSaude {
 	public float atendimentosDiarios() {
 		return hospital.getNumeroPacientesDia();
 	}
-	
-	
-	
-	
-
 }

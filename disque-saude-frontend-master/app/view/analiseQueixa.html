@@ -1,22 +1,30 @@
 <div class="container center-block">
-  <div ng-repeat="complaint in complaints">
-    <div class="jumbotron col-md-6 col-md-offset-2">
-      <h2><bold>Id:</bold> {{ complaint.id }}</h1>
-      <p><bold>Descrição: </bold>{{complaint.descricao}}</p>
-      <p><bold>Comentário: </bold> {{complaint.comentario}}</p>
-      <br/>
-      <p><bold>Dados do Estabelecimento</bold></p>
-      <p><bold>Rua:</bold> {{complaint.estabelecimento.rua}}</p>
-      <p><bold>UF:</bold> {{complaint.estabeleciemnto.uf}}</p>
-      <p><bold>Cidade:</bold> {{complaint.estabeleciemnto.cidade}}</p>
-      <br/>
-      <p><bold>Situação:</bold> {{complaint.situacao}}</p>
-
+  <div class="row-fluid">
+      <div class="col-lg-12">
+        <div class="jumbotron col-md-6 col-md-offset-3">
+          <button type="button" class="btn btn-primary btn-block" ng-click="getComplaints()">Listar Queixas</button>
+        </div>
+        <div ng-repeat="complaint in complaints">
+          <div class="jumbotron col-md-6 col-md-offset-3">
+            <a href="#" class="text-info">{{complaint.descricao}}</a>
+            <p>Situação: <span class="badge">{{complaint.estado}}</span></p>
+            <p>Solicitante</p>
+            <ul class="list-group">
+                <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
+                <li class="list-group-item"><b>Email: </b> {{complaint.solicitante.email}}</li>
+            </ul>
+            <p>Estabelecimento</p>
+            <ul class="list-group">
+                <li class="list-group-item"><b>Rua: </b> {{complaint.estabelecimento.rua}}</li>
+                <li class="list-group-item"><b>Cidade: </b> {{complaint.estabelecimento.cidade}}</li>
+                <li class="list-group-item"><b>UF: </b> {{complaint.estabelecimento.uf}}</li>
+            </ul>
+            <p>Comentário</p>
+            <ul class="list-group">
+                <li class="list-group-item"><b>{{complaint.comentario}}</li>
+            </ul>
+          </div>
+        </div>
     </div>
-  </div>
-
-  <div class="jumbotron col-md-6 col-md-offset-2">
-    <button type="button" class="btn btn-primary btn-block" ng-click="getComplaints()">Listar Queixas</button>
-    <button type="button" class="btn btn-primary btn-block" ng-click="getComplaints()">Pesquisar Queixa</button>
   </div>
 </div>

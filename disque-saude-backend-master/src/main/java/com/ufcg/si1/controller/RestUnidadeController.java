@@ -27,23 +27,23 @@ public class RestUnidadeController {
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
-    public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
 
         try {
             unidadeSaudeService.insere(us);
         } catch (Rep e) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (ObjetoJaExistenteException e) {
-            return new ResponseEntity<String>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/us/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(ucBuilder.path("/us/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
+        return new ResponseEntity<UnidadeSaude>(us, HttpStatus.CREATED);
     }    
 
     @RequestMapping(value = "/consultaUnidadeID/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) {
+    public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") int id) {
 
         UnidadeSaude unidadeSaudeEncontradaId = unidadeSaudeService.findById(id);
         if (unidadeSaudeEncontradaId == null) {
@@ -65,7 +65,7 @@ public class RestUnidadeController {
 
 
     @RequestMapping(value = "/mediaPacienteMedicoPorDia/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
+    public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") int id) {
 
         UnidadeSaude unidadeSaudeEncontradaName = unidadeSaudeService.findById(id);
 

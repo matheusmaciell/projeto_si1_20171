@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service("unidadeSaudeService")
 public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
+	
+	private  final AtomicInteger counter = new AtomicInteger();
     private List<UnidadeSaude> unidadesDeSaude;
 
     public UnidadeSaudeServiceImpl() {
@@ -37,22 +40,24 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     public void insere(UnidadeSaude us) throws Rep,
             ObjetoJaExistenteException {
     	if (this.existe(us.pegaCodigo()))
-    		throw new ObjetoJaExistenteException("Objeto jah existe no array");
-    	else
+    		throw new ObjetoJaExistenteException("Objeto jah existe");
+    	else {
+    		us.mudaCodigo(counter.incrementAndGet());
     		unidadesDeSaude.add(us);
+    	}
 
     }
 
     @Override
-    public boolean existe(int codigo) {
+    public boolean existe(int l) {
     	for(UnidadeSaude uni : unidadesDeSaude) {
-    		if(uni.pegaCodigo() == codigo)
+    		if(uni.pegaCodigo() == l)
     			return true;
     	}
     	return false;
     }
 
-    public UnidadeSaude findById(long id) {
+    public UnidadeSaude findById(int id) {
         for(UnidadeSaude uni : unidadesDeSaude) {
         	if(uni.pegaCodigo() == id)
         		return uni;

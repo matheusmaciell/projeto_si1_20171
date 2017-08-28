@@ -4,15 +4,28 @@
             <div class="col-md-5 col-md-offset-3">
                 <fieldset>
                     <legend>Adicionar Unidade de Saúde</legend>
-
                     <div class="form-group row">
                         <b>Bairro</b>
                         <input type="text" class="form-control" name="bairro" id="inputName" ng-model="healthunit.bairro" ng-required="true">
 
                     </div>
                 </fieldset>
-                <button class="btn btn-primary btn-block" ng-click="addHU(healthunit)" ng-disabled="complaintForm.$invalid">Adicionar Unidade</button>
+                <button class="btn btn-primary btn-block" onclick="addHU(healthunit)" ng-disabled="complaintForm.$invalid">Adicionar Unidade</button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+  function addHU(healthunit) {
+      $http.post("http://localhost:5000/SpringBootRestApi/unidadeSaude/incluirUnidade/" + JSON.stringify(healthunit))
+          .then(function success(response) {
+            toastr.success("Unidade adicionada com sucesso!");
+            response.addHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+            console.log(healthunit);
+          }, function failed(error) {
+              console.log("Erro ao adicionar unidades");
+              console.log(error.data.errorMessage);
+          });
+  }
+</script>

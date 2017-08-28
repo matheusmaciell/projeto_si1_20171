@@ -2,14 +2,9 @@ package com.ufcg.si1.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.ufcg.si1.service.UnidadeSaudeService;
 
-import exceptions.ObjetoInexistenteException;
-import exceptions.ObjetoJaExistenteException;
-import exceptions.Rep;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -27,9 +22,7 @@ public abstract class UnidadeSaude {
     int contador = 0;
 
     public UnidadeSaude(String bairro) {
-        this.codigo = 0; // gerado no repositorio
-        this.bairro = bairro;
-        
+        this.bairro = bairro;        
 	}
 
   
@@ -60,8 +53,8 @@ public abstract class UnidadeSaude {
         return this.codigo;
     }
 
-    public void mudaCodigo(int cod) {
-        this.codigo = cod;
+    public void mudaCodigo(int l) {
+        this.codigo = l;
     }
     
     public abstract int getNumeroFuncionarios();
@@ -72,7 +65,6 @@ public abstract class UnidadeSaude {
   	public int hashCode() {
   		final int prime = 31;
   		int result = 1;
-  		result = prime * result + codigo;
   		result = prime * result + contador;
   		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
   		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
