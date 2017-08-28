@@ -19,17 +19,19 @@ import java.util.List;
 public abstract class UnidadeSaude {
     private int codigo;
 
-    private String descricao;
+    private String bairro;
 
     private List<Especialidade> especialidades = new ArrayList();
 
     private List idsDeQueixas = new ArrayList();
     int contador = 0;
 
-    public UnidadeSaude(String descricao) {
-        this.codigo = 0; 
-        this.descricao = descricao;
-    }
+    public UnidadeSaude(String bairro) {
+        this.codigo = 0; // gerado no repositorio
+        this.bairro = bairro;
+        
+	}
+
   
 	public UnidadeSaude(){
     }
@@ -38,15 +40,15 @@ public abstract class UnidadeSaude {
         idsDeQueixas.add(id);
     }
 
-    public String pegaDescricao() {
-        return this.descricao;
-    }
+    public String getBairro() {
+		return bairro;
+	}
 
-    public void mudaDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public List<Especialidade> getEspecialidades() {
+	public List<Especialidade> getEspecialidades() {
         return this.especialidades;
     }
 
@@ -72,7 +74,7 @@ public abstract class UnidadeSaude {
   		int result = 1;
   		result = prime * result + codigo;
   		result = prime * result + contador;
-  		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+  		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
   		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
   		result = prime * result + ((idsDeQueixas == null) ? 0 : idsDeQueixas.hashCode());
   		return result;
@@ -90,10 +92,10 @@ public abstract class UnidadeSaude {
   			return false;
   		if (contador != other.contador)
   			return false;
-  		if (descricao == null) {
-  			if (other.descricao != null)
+  		if (bairro == null) {
+  			if (other.bairro != null)
   				return false;
-  		} else if (!descricao.equals(other.descricao))
+  		} else if (!bairro.equals(other.bairro))
   			return false;
   		if (especialidades == null) {
   			if (other.especialidades != null)

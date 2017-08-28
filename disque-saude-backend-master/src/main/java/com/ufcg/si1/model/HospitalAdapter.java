@@ -1,7 +1,6 @@
 package com.ufcg.si1.model;
 
 
-import java.util.List;
 
 import br.edu.ufcg.Hospital;
 
@@ -24,7 +23,7 @@ public class HospitalAdapter extends UnidadeSaude {
 	}
 	
 	@Override
-	public String pegaDescricao() {
+	public String getBairro() {
 		return hospital.getDescricao();		
 	}
 	

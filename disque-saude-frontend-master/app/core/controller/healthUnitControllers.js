@@ -34,8 +34,10 @@ app.controller("addHealthUnitCtrl", function ($scope, $http, toastr, $location) 
     $scope.addHU = function (healthunit) {
         $http.post("http://localhost:5000/SpringBootRestApi/unidadeSaude/incluirUnidade/" + JSON.stringify(healthunit))
             .then(function success(response) {
-                toastr.success("Unidade de Saúde adicionada com sucesso!");
-                console.log(response.data);
+              toastr.success("Unidade adicionada com sucesso!");
+              $location.path('/adminArea');
+              response.addHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+              console.log(healthunit);
             }, function failed(error) {
                 console.log("Erro ao adicionar unidades");
                 console.log(error.data.errorMessage);

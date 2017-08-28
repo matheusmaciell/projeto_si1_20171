@@ -63,12 +63,11 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     @Override
     public UnidadeSaude findByBairro(String bairro) {
         for (UnidadeSaude esp: unidadesDeSaude) {
-            if (esp.pegaDescricao().equals(bairro)){
-                return esp;
-            }
+            if (esp.getBairro().equals(bairro)){
+            	return esp;
             
+            }
         }
         return null;
     }
-
 }
