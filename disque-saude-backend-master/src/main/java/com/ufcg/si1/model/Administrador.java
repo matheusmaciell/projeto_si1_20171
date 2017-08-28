@@ -1,27 +1,16 @@
 package com.ufcg.si1.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Administrador{
-	
-	
-	@Id
-	@GeneratedValue
-	private Long id;
 	
 	private String senha;
 	private String nome;
 	private String email;
 
-	public Administrador(String nome, String email, String senha){
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
+	public Administrador(){
 		
 	}
+	
+	
 	public String getNome() {
 		return nome;
 	}

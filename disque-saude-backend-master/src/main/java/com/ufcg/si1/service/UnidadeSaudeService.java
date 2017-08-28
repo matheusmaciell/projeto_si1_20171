@@ -10,15 +10,17 @@ import com.ufcg.si1.model.UnidadeSaude;
 
 
 public interface UnidadeSaudeService {
-	
-    public List<UnidadeSaude> getAll();
+	UnidadeSaude procura(int codigo) throws Rep,
+            ObjetoInexistenteException;
 
-    void save(UnidadeSaude us)throws Rep,ObjetoJaExistenteException;
+    List<UnidadeSaude> getAll();
 
-    UnidadeSaude findById(long id) throws ObjetoInexistenteException;
+    void insere(UnidadeSaude us)throws Rep,
+            ObjetoJaExistenteException;
 
-    public UnidadeSaude findByBairro(String bairro);
-    
-    List<UnidadeSaude> findByEspecialidade(String especialidadeBuscada);
-    
+    boolean existe(int codigo);
+
+    UnidadeSaude findById(long id);
+
+    UnidadeSaude findByBairro(String bairro);
 }

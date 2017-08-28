@@ -2,37 +2,24 @@ package com.ufcg.si1.model;
 
 import exceptions.ObjetoInvalidoException;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import com.ufcg.si1.state.EstadoQueixa;
 
-@Entity
 public class Queixa {
 
-	
-	@Id
-	@GeneratedValue
-	private Long id;
+	private long id;
 
 	private String descricao;
 
-	@Embedded
 	private Pessoa solicitante;
 
-	@Embedded
 	private Endereco estabelecimento;
 	
-	@Enumerated(EnumType.STRING)
 	private EstadoQueixa estado;
 	
-	private String comentario = "";
+	private String comentario = ""; // usado na atualizacao da queixa
 
 	public Queixa(){
+		id = 0;
 	}
 
 	public Queixa(long id, String descricao, EstadoQueixa estado, String comentario,

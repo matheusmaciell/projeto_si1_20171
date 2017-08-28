@@ -6,7 +6,7 @@ public class QueixaAnimal extends Queixa {
 	
 	private String tipoAnimal;
 	
-	public QueixaAnimal(long id, String descricao, EstadoQueixa estado, String comentario,String nome, String email,String rua, String uf, String cidade, String tipoAnimal) {
+	public QueixaAnimal(int id, String descricao, EstadoQueixa estado, String comentario,String nome, String email,String rua, String uf, String cidade, String tipoAnimal) {
 		super(id,descricao,estado,comentario,nome,email,rua,uf,cidade);
 		this.setTipoAnimal(tipoAnimal);
 	}

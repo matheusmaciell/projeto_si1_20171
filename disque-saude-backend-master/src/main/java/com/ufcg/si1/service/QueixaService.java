@@ -5,27 +5,32 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.QueixaAnimal;
 
 import exceptions.ObjetoInvalidoException;
 
 public interface QueixaService {
 
-	public List<Queixa> findAllQueixas();
+	List<Queixa> findAllQueixas();
 	
-    public void saveQueixa(Queixa queixa);
-    
-    public void saveQueixa(QueixaAnimal queixa);
+    void saveQueixa(Queixa queixa);
 
-	public Queixa findById(long id);
+	Queixa findById(long id);
 	
-	public Queixa findByName(String name);
-	
-	public void updateQueixa(Queixa user);
+	Queixa findByName(String name);
+
+	void updateQueixa(long id, Queixa user);
 
 	void deleteQueixaById(long id);
-	
-	public void fecharQueixa(Queixa queixa) throws ObjetoInvalidoException;
 
+    int size();
+
+	Iterator<Queixa> getIterator();
+
+	double numeroQueixasAbertas();
+
+	void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException;
+
+
+//	boolean isUserExist(Queixa user);
 	
 }

@@ -3,7 +3,6 @@ package com.ufcg.si1.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.*;
 
-import exceptions.ObjetoInexistenteException;
+
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
 
@@ -23,35 +22,35 @@ import exceptions.Rep;
 @CrossOrigin
 public class RestUnidadeController {
 	
-
-	@Autowired
-	private UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+	 QueixaService queixaService = new QueixaServiceImpl();
+	 UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 	 
 	//how to save a subclass object?
     @RequestMapping(value = "/incluirUnidade/", method = RequestMethod.POST)
-    public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody PostoSaude us, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
 
         try {
-            unidadeSaudeService.save(us);
+            unidadeSaudeService.insere(us);
         } catch (Rep e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         } catch (ObjetoJaExistenteException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<String>(HttpStatus.CONFLICT);
         }
 
-        return new ResponseEntity<>(us, HttpStatus.CREATED);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/us/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }    
 
     @RequestMapping(value = "/consultaUnidadeID/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) {
-		try {
-			  UnidadeSaude unidadeSaudeEncontradaId = unidadeSaudeService.findById(id);
-				return new ResponseEntity<>(unidadeSaudeEncontradaId, HttpStatus.OK);
-		} catch (ObjetoInexistenteException e) {
-			 return new ResponseEntity<>(new CustomErrorType("Unidade with id " + id
-	                    + " not found"), HttpStatus.NOT_FOUND);
-		}
-	
+
+        UnidadeSaude unidadeSaudeEncontradaId = unidadeSaudeService.findById(id);
+        if (unidadeSaudeEncontradaId == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unidade with id " + id
+                    + " not found"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(unidadeSaudeEncontradaId, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/getUnidades/", method = RequestMethod.GET)
@@ -67,7 +66,18 @@ public class RestUnidadeController {
 
     @RequestMapping(value = "/mediaPacienteMedicoPorDia/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
-    	return null;
+
+        UnidadeSaude unidadeSaudeEncontradaName = unidadeSaudeService.findById(id);
+
+        if(unidadeSaudeEncontradaName == null){
+            return new ResponseEntity<ObjWrapper<Double>>(HttpStatus.NOT_FOUND);
+        }
+
+        double calculo = 0.0;
+        
+        calculo = unidadeSaudeEncontradaName.getNumeroFuncionarios() / unidadeSaudeEncontradaName.atendimentosDiarios();
+        
+        return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(calculo)), HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidadesSaudeBairro/", method= RequestMethod.GET)

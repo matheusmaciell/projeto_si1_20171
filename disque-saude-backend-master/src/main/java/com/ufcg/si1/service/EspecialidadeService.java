@@ -5,23 +5,24 @@ import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
 
-import java.util.Collection;
 import java.util.List;
 
 
 public interface EspecialidadeService {
-	
-    public Especialidade procuraEspecialidade(long id) throws Rep,ObjetoInexistenteException;
+    Especialidade procura(int codigo) throws Rep,
+            ObjetoInexistenteException;
 
-    public List<Especialidade> getListaEspecialidades(Long unidadadeSaudeId);
+    List getListaEspecialidade()
+                    throws Rep, ObjetoInexistenteException;
 
-    public void save(Especialidade esp) throws ObjetoJaExistenteException;
-    
-    public Collection<Especialidade> getTodasEspecialidades();
-    
-    public List<Long> getUnidadesPorEspecialidade(String descricao) throws ObjetoInexistenteException;
+    int size();
 
+    Especialidade getElemento(int posicao);
+
+    void insere(Especialidade esp)throws Rep,
+            ObjetoJaExistenteException;
+
+    boolean existe(int codigo);
+
+    Especialidade findById(long id);
 }
-
-
-

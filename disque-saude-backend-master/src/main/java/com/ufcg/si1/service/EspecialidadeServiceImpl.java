@@ -1,67 +1,93 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Especialidade;
-import com.ufcg.si1.repository.EspecialidadeRepository;
-
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 @Service("especialidadeService")
 public class EspecialidadeServiceImpl implements EspecialidadeService {
 
-	
-	@Autowired
-	EspecialidadeRepository especialidadeRep;
-	
-	
-	@Override
-	public Especialidade procuraEspecialidade(long id) throws Rep, ObjetoInexistenteException {
-		Especialidade espProcurada = this.especialidadeRep.findOne(id);
-		
-		if(espProcurada != null)
-			return espProcurada;
-		else
-			throw new ObjetoInexistenteException("Especialidade não foi encontrada");
-	}
+    private List<Especialidade> especialidades;
 
-	@Override
-	public List<Especialidade> getListaEspecialidades(Long unidadadeSaudeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private int geraCodigo = 0; // para gerar codigos
 
-	@Override
-	public void save(Especialidade esp) throws ObjetoJaExistenteException {
-		if(exists(esp.getId())) {
-			throw new ObjetoJaExistenteException("Objeto já foi cadastrado");
+    public EspecialidadeServiceImpl() {
+        especialidades = new ArrayList<>();
+    }
+
+    @Override
+    public Especialidade procura(int codigo) throws Rep,
+            ObjetoInexistenteException {
+        
+        for (Especialidade especialidade : especialidades) {
+        	if(especialidade.getCodigo() == codigo) return especialidade;
+			
 		}
-		this.especialidadeRep.save(esp);
-		
-	}
-	
-	 private boolean exists(Long espId) {
-	        return (this.especialidadeRep.findOne(espId) != null);
-	    }
 
-	@Override
-	public Collection<Especialidade> getTodasEspecialidades() {
-		return this.especialidadeRep.findAll();
-	}
+        throw new ObjetoInexistenteException("Erro Especialidade");
+    }
 
-	@Override
-	public List<Long> getUnidadesPorEspecialidade(String descricao) throws ObjetoInexistenteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List getListaEspecialidade()
+            throws Rep, ObjetoInexistenteException {
+        return Arrays.asList(especialidades);
+    }
 
-    
+    @Override
+    public int size() {
+        return this.especialidades.size();
+    }
+
+    @Override
+    public Especialidade getElemento(int posicao) {
+        if (posicao < especialidades.size())
+            return this.especialidades.get(posicao);
+        else
+            return null;
+    }
+
+    @Override
+    public void insere(Especialidade esp) throws Rep,
+            ObjetoJaExistenteException {
+
+        esp.setCodigo(++geraCodigo);
+
+        if (this.existe(esp.getCodigo())) {
+            throw new ObjetoJaExistenteException("Objeto jah existe no array");
+        }
+
+        this.especialidades.add(esp);
+    }
+
+    @Override
+    public boolean existe(int codigo) {
+
+        boolean existe = false;
+        
+        for (Especialidade especialidade : especialidades) {
+			if (especialidade.getCodigo() == codigo) {
+				existe = true;
+				break;
+			}
+		}
+
+        return existe;
+    }
+
+    public Especialidade findById(long id) {
+        for (Especialidade esp: especialidades) {
+            if (esp.getCodigo() == id) {
+                return esp;
+            }
+        }
+        return null;
+    }
+
+
 }

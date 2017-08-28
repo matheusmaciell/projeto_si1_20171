@@ -1,8 +1,5 @@
 package com.ufcg.si1.model;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Endereco {
 
 	private String rua;
@@ -22,27 +19,15 @@ public class Endereco {
 	}
 
 	public String getRua() {
-		return rua;
-	}
-
-	public void setRua(String rua) {
-		this.rua = rua;
+		return this.rua;
 	}
 
 	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
+		return this.uf;
 	}
 
 	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+		return this.cidade;
 	}
 
 	@Override
@@ -81,7 +66,6 @@ public class Endereco {
 			return false;
 		return true;
 	}
-
 	
 	
 }
