@@ -72,8 +72,8 @@ app.controller("listComplaints", function($scope, $http) {
 
 
 app.controller("getOpenComplaints", function ($scope, $http) {
-    $scope.openComplaints = 0;
 
+    $scope.openComplaints = 0;
     $scope.openComplaints = function () {
         $http.get("http://localhost:5000/SpringBootRestApi/queixa/queixasAbertas/").then(function successCallback(response) {
             $scope.openComplaints = response.data;
@@ -82,12 +82,9 @@ app.controller("getOpenComplaints", function ($scope, $http) {
             console.log(error);
         });
     }
-});
 
 
-app.controller("getClosedComplaints", function ($scope, $http) {
     $scope.closedComplaints = 0;
-
     $scope.closedComplaints = function () {
         $http.get("http://localhost:5000/SpringBootRestApi/queixa/queixasFechadas/").then(function successCallback(response) {
             $scope.closedComplaints = response.data;
@@ -96,4 +93,4 @@ app.controller("getClosedComplaints", function ($scope, $http) {
             console.log(error);
         });
      }
- });
+});

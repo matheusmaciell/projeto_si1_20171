@@ -25,12 +25,8 @@ public class QueixaServiceImpl implements QueixaService {
     }
     
     public int getAbertas(){
-    	int contAbertas = 0;
- 		for (int i = 0; i < queixas.size(); i++) {
- 			if(queixas.get(i).getEstado().equals(EstadoQueixa.ABERTA)){
- 				contAbertas++;
- 			}
- 		}
+    	int contAbertas = queixas.size();
+ 		
     	return contAbertas;
     }
     

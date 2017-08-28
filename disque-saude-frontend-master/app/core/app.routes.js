@@ -35,6 +35,9 @@ app.config(function ($routeProvider) {
     }).when("/analiseQueixa", {
         templateUrl: "view/analiseQueixa.html",
         controller: "listComplaints"
+    }).when("/eficiencia", {
+        templateUrl: "view/eficiencia.html",
+        controller: "getOpenComplaints"
     }).when("/adicionarUnidade", {
         templateUrl: "view/adicionarUnidade.html",
         controller: "addHealthUnitCtrl"
