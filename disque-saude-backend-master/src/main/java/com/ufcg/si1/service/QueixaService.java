@@ -30,6 +30,10 @@ public interface QueixaService {
 	void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException;
 
 	int size();
+	
+	int getAbertas();
+	
+	int getFechadas();
 
 
 //	boolean isUserExist(Queixa user);
