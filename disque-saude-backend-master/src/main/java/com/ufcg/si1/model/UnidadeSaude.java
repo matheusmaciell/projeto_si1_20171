@@ -27,7 +27,7 @@ public abstract class UnidadeSaude {
     int contador = 0;
 
     public UnidadeSaude(String descricao) {
-        this.codigo = 0; // gerado no repositorio
+        this.codigo = 0; 
         this.descricao = descricao;
     }
   

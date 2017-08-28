@@ -22,7 +22,6 @@ public interface QueixaService {
 
 	void deleteQueixaById(long id);
 
-    int size();
 
 	Iterator<Queixa> getIterator();
 

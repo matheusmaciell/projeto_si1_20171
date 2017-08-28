@@ -16,38 +16,8 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
-    private static final AtomicLong counter = new AtomicLong();
-
-    //o array foi iniciado
-    private static List<Queixa> queixas = new ArrayList<Queixa>();
-
-    static {
-        //queixas = populateDummyQueixas();
-    }
-
-    private static List<Queixa> populateDummyQueixas() {
-        List<Queixa> queixas = new ArrayList<Queixa>();
-
-        queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
-        		EstadoQueixa.FECHADA, "", "Jose Silva",
-                "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
-
-
-        queixas.add(new Queixa(counter.incrementAndGet(),
-                "Bacalhau estragado, passamos mal!", EstadoQueixa.FECHADA, "",
-                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
-                "Joao Pessoa"));
-
-        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", EstadoQueixa.FECHADA, "",
-                "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
-
-
-        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", EstadoQueixa.FECHADA, "",
-                "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
-                "Joao Pessoa"));
-
-        return queixas;
-    }
+    private  final AtomicLong counter = new AtomicLong();
+    private List<Queixa> queixas = new ArrayList<Queixa>();
 
     public List<Queixa> findAllQueixas() {
         return queixas;
@@ -62,10 +32,8 @@ public class QueixaServiceImpl implements QueixaService {
 
     public void updateQueixa(long id, Queixa queixa) {
     	Queixa currentQueixa = this.findById(id);
-    	
     	currentQueixa.setDescricao(queixa.getDescricao());
 		currentQueixa.setComentario(queixa.getComentario());
-		
         int index = queixas.indexOf(queixa);
         queixas.set(index, queixa);
     }
@@ -76,19 +44,11 @@ public class QueixaServiceImpl implements QueixaService {
     }
 
     public void deleteQueixaById(long id) {
-
-        for (Iterator<Queixa> iterator = queixas.iterator(); iterator.hasNext(); ) {
-            Queixa q = iterator.next();
-            if (q.getId() == id) {
-                iterator.remove();
+        for (Queixa queixa : queixas) {
+            if (queixa.getId() == id) {
+                queixas.remove(queixa);
             }
         }
-    }
-
-    @Override
-    //este metodo nunca eh chamado, mas se precisar estah aqui
-    public int size() {
-        return queixas.size();
     }
 
     @Override
@@ -121,10 +81,8 @@ public class QueixaServiceImpl implements QueixaService {
 	@Override
 	public double numeroQueixasAbertas() {
         int contador = 0;
-        Iterator<Queixa> it = this.getIterator();
-        for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
-            Queixa q = it1.next();
-            if (q.getSituacao() == EstadoQueixa.ABERTA)
+        for (Queixa queixa: queixas) {
+            if (queixa.getSituacao() == EstadoQueixa.ABERTA)
                 contador++;
         }
 
