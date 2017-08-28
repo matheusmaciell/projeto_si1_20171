@@ -31,14 +31,10 @@ public class RestQueixaController {
 	
 	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
 	 	public ResponseEntity<?> queixasAbertas() {
+		
 	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		int contAbertas = queixaService.getAbertas();
 	 		
-	 		int contAbertas = 0;
-	 		for (int i = 0; i < queixas.size(); i++) {
-	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.ABERTA)){
-	 				contAbertas++;
-	 			}
-	 		}
 	 		if (queixas.isEmpty()) {
 	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	 		}
@@ -47,14 +43,10 @@ public class RestQueixaController {
 	 	
 	 	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
 	 	public ResponseEntity<?> queixasFechadas() {
-	 		List<Queixa> queixas = queixaService.findAllQueixas();
 	 		
-	 		int contFechadas = 0;
-	 		for (int i = 0; i < queixas.size(); i++) {
-	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.FECHADA)){
-	 				contFechadas++;
-	 			}
-	 		}
+	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		int contFechadas = queixaService.getFechadas();
+	 		
 	 		if (queixas.isEmpty()) {
 	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	 		}
