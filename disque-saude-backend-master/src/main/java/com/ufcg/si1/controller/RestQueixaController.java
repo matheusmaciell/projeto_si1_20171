@@ -4,6 +4,7 @@ import com.ufcg.si1.model.*;
 import com.ufcg.si1.model.prefeitura.*;
 import com.ufcg.si1.model.situacao.Situacao;
 import com.ufcg.si1.service.*;
+import com.ufcg.si1.state.EstadoQueixa;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
@@ -27,6 +28,39 @@ public class RestQueixaController {
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
 
+	
+	@RequestMapping(value = "/queixasAbertas/", method = RequestMethod.GET)
+	 	public ResponseEntity<?> queixasAbertas() {
+	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		
+	 		int contAbertas = 0;
+	 		for (int i = 0; i < queixas.size(); i++) {
+	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.ABERTA)){
+	 				contAbertas++;
+	 			}
+	 		}
+	 		if (queixas.isEmpty()) {
+	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	 		}
+	 		return new ResponseEntity<>(contAbertas, HttpStatus.OK);
+	 	}
+	 	
+	 	@RequestMapping(value = "/queixasFechadas/", method = RequestMethod.GET)
+	 	public ResponseEntity<?> queixasFechadas() {
+	 		List<Queixa> queixas = queixaService.findAllQueixas();
+	 		
+	 		int contFechadas = 0;
+	 		for (int i = 0; i < queixas.size(); i++) {
+	 			if(queixas.get(i).getEstado().equals(EstadoQueixa.FECHADA)){
+	 				contFechadas++;
+	 			}
+	 		}
+	 		if (queixas.isEmpty()) {
+	 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	 		}
+	 		return new ResponseEntity<>(contFechadas, HttpStatus.OK);
+	 	}
+	
 	/**
 	 * 
 	 * @return
