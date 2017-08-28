@@ -22,13 +22,14 @@ public interface QueixaService {
 
 	void deleteQueixaById(long id);
 
-    int size();
 
 	Iterator<Queixa> getIterator();
 
 	double numeroQueixasAbertas();
 
 	void fecharQueixa(Queixa queixaAFechar) throws ObjetoInvalidoException;
+
+	int size();
 
 
 //	boolean isUserExist(Queixa user);

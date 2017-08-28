@@ -8,7 +8,7 @@ public class Especialidade {
     private String descricao;
 
     public Especialidade(String descricao) {
-        this.codigo = 0; // gerado no repositorio
+        this.codigo = 0; 
         this.descricao = descricao;
     }
 

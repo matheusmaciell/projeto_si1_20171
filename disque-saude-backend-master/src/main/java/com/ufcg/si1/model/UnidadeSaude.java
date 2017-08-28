@@ -29,7 +29,9 @@ public abstract class UnidadeSaude {
     public UnidadeSaude(String bairro) {
         this.codigo = 0; // gerado no repositorio
         this.bairro = bairro;
-    }
+        
+	}
+
   
 	public UnidadeSaude(){
     }
